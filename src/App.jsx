@@ -1,23 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import Home from "./components/Home";
+// import Shop from "./pages/Shop";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold text-red-600 underline mb-4">
-        Hello World with Tailwind!
-      </h1>
+    <BrowserRouter>
+      <Routes>
 
-      <p className="text-lg text-gray-700">
-        هذا مثال لتأكيد أن Tailwind CSS شغال في مشروع React
-      </p>
+        {/* Layout فيه Navbar */}
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          {/* <Route path="shop" element={<Shop />} /> */}
+        </Route>
 
-      <button className="mt-6 px-6 py-3 bg-red-500 text-red-600 rounded-lg hover:bg-blue-600 transition">
-        زر تجريبي
-      </button>
-    </div>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
