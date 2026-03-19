@@ -6,7 +6,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-gray-200 relative shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] mt-24">
+    <footer className="bg-white border-t border-gray-200 relative shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] ">
       {" "}
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Top Section: Brand + Newsletter */}
