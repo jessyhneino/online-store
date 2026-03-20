@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../store/themeSlice";
 import {
   ShoppingCart,
   User,
@@ -21,59 +22,37 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function AdvancedNavbar() {
-  // const { i18n } = useTranslation();
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
+  const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const menuRef = useRef(null);
+  const searchRef = useRef(null);
 
-  const currentLang = i18n.language.split("-")[0];
-  useEffect(() => {
-    const lang = i18n.resolvedLanguage;
-
-    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-  }, [i18n.resolvedLanguage]);
-
-  const toggleLanguage = () => {
-    const currentLang = i18n.resolvedLanguage;
-    const newLang = currentLang === "en" ? "ar" : "en";
-
-    i18n.changeLanguage(newLang);
-    localStorage.setItem("i18nextLng", newLang); // 👈 مهم
-  };
+  // --- حالات القوائم والبحث ---
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState(null);
-
-  // توحيد حالة البحث لتعمل في الديسكتوب والموبايل معاً
   const [searchQuery, setSearchQuery] = useState("");
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [lang, setLang] = useState("EN");
+  // --- منطق اللغة والاتجاه ---
+  const currentLang = i18n.language.split("-")[0];
 
-  const menuRef = useRef();
-  const searchRef = useRef();
-  const navigate = useNavigate();
+  useEffect(() => {
+    const lang = i18n.resolvedLanguage;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = lang;
+  }, [i18n.resolvedLanguage]);
 
-  // دالة التعامل مع البحث عند الضغط على Enter
-  const handleSearchSubmit = (e) => {
-    if (e.key === "Enter" && searchQuery.trim() !== "") {
-      // توجيه المستخدم لصفحة البحث (تأكد من وجود هذا المسار في مشروعك)
-      navigate(`/search?q=${searchQuery}`);
-      setIsSearchOpen(false);
-      setIsOpen(false); // إغلاق منيو الموبايل أيضاً
-    }
+  const toggleLanguage = () => {
+    const newLang = i18n.resolvedLanguage === "en" ? "ar" : "en";
+    i18n.changeLanguage(newLang);
   };
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    if (!isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  };
-
+  // --- تأثيرات إضافية (Scroll & Click Outside) ---
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
@@ -82,43 +61,57 @@ export default function AdvancedNavbar() {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
+      if (menuRef.current && !menuRef.current.contains(e.target))
         setIsUserMenuOpen(false);
-        setActiveMegaMenu(null);
-      }
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
+      if (searchRef.current && !searchRef.current.contains(e.target))
         setIsSearchOpen(false);
-      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleSearchSubmit = (e) => {
+    if (e.key === "Enter" && searchQuery.trim() !== "") {
+      navigate(`/search?q=${searchQuery}`);
+      setIsSearchOpen(false);
+      setIsOpen(false);
+    }
+  };
+
   const navLinks = [
     { name: t("Home"), path: "/" },
     {
-      name: t("Shop"),
-      path: "/shop",
+      name: t("Categories"),
+      path: "/categories",
       hasMegaMenu: true,
       categories: [
-        {
-          title: t("New Arrivals"),
-          items: [
-            t("Summer Collection"),
-            t("Luxury Watches"),
-            t("Silk Scarves"),
-          ],
-        },
-        {
-          title: t("Featured"),
-          items: [
-            t("Best Sellers"),
-            t("Limited Edition"),
-            t("Celebrity Choice"),
-          ],
-        },
+        { title: t("Skincare"), items: [t("Moisturizers"), t("Cleansers")] },
+        { title: t("Fragrance"), items: [t("Perfumes"), t("Candles")] },
       ],
     },
+    // {
+    //   name: t("Shop"),
+    //   path: "/shop",
+    //   hasMegaMenu: true,
+    //   categories: [
+    //     {
+    //       title: t("New Arrivals"),
+    //       items: [
+    //         t("Summer Collection"),
+    //         t("Luxury Watches"),
+    //         t("Silk Scarves"),
+    //       ],
+    //     },
+    //     {
+    //       title: t("Featured"),
+    //       items: [
+    //         t("Best Sellers"),
+    //         t("Limited Edition"),
+    //         t("Celebrity Choice"),
+    //       ],
+    //     },
+    //   ],
+    // },
     { name: t("Deals"), path: "/deals" },
     { name: t("About"), path: "/about" },
   ];
@@ -128,25 +121,25 @@ export default function AdvancedNavbar() {
       <nav
         className={`fixed w-full z-[100] transition-all duration-500 border-b ${
           isScrolled
-            ? "bg-white/80 dark:bg-black/80 backdrop-blur-lg py-3 border-gray-200 dark:border-gray-800 shadow-md"
-            : "bg-transparent py-6 border-transparent"
+            ? "bg-white/90 py-3 border-gray-200 shadow-md backdrop-blur-md dark:bg-black/90 dark:border-blue-500"
+            : "bg-transparent py-6 border-transparent dark:bg-black/70 dark:border-blue-500"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* 1. Logo */}
           <Link
             to="/"
-            className="text-xl sm:text-2xl font-black tracking-tighter flex items-center gap-1 group z-[110] flex-shrink-0"
+            className="text-xl sm:text-2xl font-black tracking-tighter flex items-center gap-1 group z-[110]"
           >
             <span className="bg-black dark:bg-blue-600 text-white px-2 py-0.5 rounded transition-transform group-hover:-rotate-3">
               A
             </span>
             <span
-              className={`${
+              className={
                 isScrolled
                   ? "text-black dark:text-white"
                   : "text-gray-900 dark:text-gray-100"
-              }`}
+              }
             >
               {t("TELIER")}
               <span className="font-extralight text-blue-600 dark:text-blue-400">
@@ -250,22 +243,22 @@ export default function AdvancedNavbar() {
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
-              className="flex flex-col items-center gap-1 dark:text-white lg:flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-zinc-800 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all group"
+              className="flex items-center gap-1.5 px-0 py-1.5 border border-gray-200 dark:border-zinc-800 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all group"
             >
               <Languages
                 size={15}
                 className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600"
               />
-              <span className="text-[11px] font-black dark:text-gray-300">
+              <span className="text-[11px] font-black dark:text-gray-300 uppercase">
                 {currentLang === "en" ? "AR" : "EN"}
               </span>
             </button>
 
-            {/* Dark Mode */}
+            {/* Dark Mode Button */}
             <motion.button
               whileTap={{ scale: 0.9 }}
-              onClick={toggleDarkMode}
-              className="flex flex-col items-center gap-1 dark:text-white lg:flex p-2.5 bg-gray-100 dark:bg-zinc-800 rounded-full text-gray-700 dark:text-yellow-400 hover:ring-2 ring-blue-500/20 transition-all"
+              onClick={() => dispatch(toggleTheme())}
+              className="flex flex-col items-center justify-center w-10 h-10 rounded-full transition-all bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-zinc-800 dark:text-yellow-400 dark:hover:bg-zinc-700"
             >
               {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
             </motion.button>
@@ -276,9 +269,9 @@ export default function AdvancedNavbar() {
             <div className="relative" ref={menuRef}>
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center gap-1 sm:gap-2 p-1 pr-2 sm:pr-3 bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all"
+                className="flex items-center gap-2 p-1 pr-3 bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all"
               >
-                <div className="h-7 w-7 sm:h-8 sm:w-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-[10px] sm:text-xs flex-shrink-0">
+                <div className="h-8 w-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xs">
                   {isLoggedIn ? "JD" : <User size={14} />}
                 </div>
                 <ChevronDown
@@ -337,9 +330,8 @@ export default function AdvancedNavbar() {
               </AnimatePresence>
             </div>
 
-            {/* Mobile Menu Trigger */}
             <button
-              className="lg:hidden p-2 bg-black dark:bg-blue-600 text-white rounded-lg active:scale-90 transition-transform"
+              className="lg:hidden p-2 bg-black dark:bg-blue-600 text-white rounded-lg active:scale-90"
               onClick={() => setIsOpen(true)}
             >
               <Menu size={20} />
@@ -364,7 +356,7 @@ export default function AdvancedNavbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[65%] max-sm:w-[85%] bg-white dark:bg-zinc-900 z-[160] shadow-2xl p-6 sm:p-8 lg:hidden flex flex-col"
+              className="fixed top-0 right-0 h-full w-[80%] max-w-sm bg-white dark:bg-zinc-900 z-[160] shadow-2xl p-6 lg:hidden flex flex-col"
             >
               <div className="flex items-center justify-between mb-8">
                 <span className="font-bold text-xl tracking-tighter dark:text-white">
@@ -378,18 +370,18 @@ export default function AdvancedNavbar() {
                 </button>
               </div>
 
-              {/* --- New Search Bar for Mobile (Linked with State) --- */}
               <div className="mb-6 relative">
-                <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                  <Search size={18} className="text-gray-400" />
-                </div>
+                <Search
+                  size={18}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={handleSearchSubmit}
                   placeholder="Search products..."
-                  className="w-full bg-gray-100 dark:bg-zinc-800 dark:text-white border-none rounded-2xl py-4 pl-12 pr-4 text-base focus:ring-2 ring-blue-500/50 outline-none transition-all"
+                  className="w-full bg-gray-100 dark:bg-zinc-800 dark:text-white border-none rounded-2xl py-4 pl-12 pr-4 text-base focus:ring-2 ring-blue-500/50 outline-none"
                 />
               </div>
 
@@ -399,7 +391,7 @@ export default function AdvancedNavbar() {
                     key={link.name}
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center justify-between group py-2"
+                    className="text-xl font-bold text-gray-800 dark:text-gray-100 flex items-center justify-between py-2 border-b border-gray-50 dark:border-zinc-800"
                   >
                     {link.name}
                     <ArrowRight size={20} className="text-blue-600" />
@@ -410,7 +402,7 @@ export default function AdvancedNavbar() {
               <div className="border-t dark:border-zinc-800 pt-6 space-y-4">
                 <div className="flex items-center justify-around p-4 bg-gray-50 dark:bg-zinc-800 rounded-2xl">
                   <button
-                    onClick={toggleDarkMode}
+                    onClick={() => dispatch(toggleTheme())} // ✅ يرسل toggleTheme للـ Redux
                     className="flex flex-col items-center gap-1 dark:text-yellow-400"
                   >
                     {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
@@ -420,13 +412,13 @@ export default function AdvancedNavbar() {
                   </button>
                   <button
                     onClick={toggleLanguage}
-                    className="flex flex-col items-center gap-1 dark:text-white lg:flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-zinc-800 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all group"
+                    className="flex flex-col items-center gap-1 dark:text-white"
                   >
                     <Languages
-                      size={15}
-                      className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600"
+                      size={20}
+                      className="text-gray-600 dark:text-gray-400"
                     />
-                    <span className="text-[11px] font-black dark:text-gray-300">
+                    <span className="text-[11px] font-black uppercase">
                       {currentLang === "en" ? "AR" : "EN"}
                     </span>
                   </button>
@@ -440,7 +432,7 @@ export default function AdvancedNavbar() {
                     </span>
                   </div>
                 </div>
-                <button className="w-full bg-black dark:bg-blue-600 text-white py-4 rounded-2xl font-bold transition-transform active:scale-95">
+                <button className="w-full bg-black dark:bg-blue-600 text-white py-4 rounded-2xl font-bold active:scale-95 transition-transform">
                   {t("Shop Now")}
                 </button>
               </div>

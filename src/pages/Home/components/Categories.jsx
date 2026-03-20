@@ -50,7 +50,7 @@ const CuratedCategories = () => {
           </p>
         </div>
         <a
-          href="#"
+          href="/collection"
           className="text-blue-600 font-semibold flex items-center hover:underline group"
         >
           {t("Browse all categories")}
