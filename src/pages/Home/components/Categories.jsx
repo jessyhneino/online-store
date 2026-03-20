@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const categories = [
   {
@@ -32,24 +33,27 @@ const categories = [
 ];
 
 const CuratedCategories = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="max-w-7xl mx-auto px-4 py-12 font-sans">
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
         <div className="max-w-xl">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Curated Categories
+            {t("Curated Categories")}
           </h2>
           <p className="text-gray-500 text-lg">
-            Navigate through our meticulously organized collections across
-            lifestyle and technology.
+            {t(
+              "Navigate through our meticulously organized collections across lifestyle and technology."
+            )}
           </p>
         </div>
         <a
           href="#"
           className="text-blue-600 font-semibold flex items-center hover:underline group"
         >
-          Browse all categories
+          {t("Browse all categories")}
           <span className="ml-2 group-hover:translate-x-1 transition-transform">
             →
           </span>
@@ -66,7 +70,7 @@ const CuratedCategories = () => {
             {/* Background Image */}
             <img
               src={cat.image}
-              alt={cat.title}
+              alt={t(cat.title)}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
 
@@ -75,8 +79,8 @@ const CuratedCategories = () => {
 
             {/* Text Content */}
             <div className="absolute bottom-6 left-6 text-white">
-              <h3 className="text-2xl font-bold mb-1">{cat.title}</h3>
-              <p className="text-sm opacity-90">{cat.items}</p>
+              <h3 className="text-2xl font-bold mb-1">{t(cat.title)}</h3>
+              <p className="text-sm opacity-90">{t(cat.items)}</p>
             </div>
           </div>
         ))}

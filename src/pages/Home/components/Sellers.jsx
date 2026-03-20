@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -8,6 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const Sellers = () => {
+  const { t } = useTranslation();
   const swiperRef = useRef(null);
 
   const products = [
@@ -66,11 +68,11 @@ const Sellers = () => {
   ];
 
   return (
-    <section className="py-12 px-6 max-w-7xl mx-auto font-sans select-none">
+    <section className="py-12 px-4 max-w-7xl mx-auto font-sans select-none">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-10">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
-          Best Sellers
+          {t("Best Sellers")}
         </h2>
 
         {/* Navigation Buttons */}
@@ -97,9 +99,9 @@ const Sellers = () => {
         spaceBetween={30}
         slidesPerView={1} // الافتراضي للموبايل
         breakpoints={{
-          440: { slidesPerView: 2 }, // بين الموبايل والتابلت الصغير
-          768: { slidesPerView: 3 }, // تابلت
-          1024: { slidesPerView: 4 }, // ديسكتوب
+          440: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
         }}
         className="mySwiper"
       >
@@ -111,22 +113,22 @@ const Sellers = () => {
                   <span
                     className={`absolute top-4 left-4 z-10 text-[10px] font-bold text-white px-3 py-1 rounded-full uppercase tracking-widest ${product.tagColor}`}
                   >
-                    {product.tag}
+                    {t(product.tag)}
                   </span>
                 )}
                 <img
                   src={product.image}
-                  alt={product.title}
+                  alt={t(product.title)}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
 
               <div className="space-y-1">
                 <span className="text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-widest">
-                  {product.category}
+                  {t(product.category)}
                 </span>
                 <h3 className="text-base md:text-lg font-bold text-gray-800 leading-tight group-hover:text-blue-600 transition-colors duration-300 truncate">
-                  {product.title}
+                  {t(product.title)}
                 </h3>
                 <p className="text-blue-600 font-bold text-sm md:text-md">
                   {product.price}

@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const HeroSection = () => {
+  const { t, i18n } = useTranslation();
+  // useEffect(() => {
+  //   i18n.changeLanguage("en");
+  // }, []);
   return (
     <section className="relative h-screen w-full overflow-hidden font-sans group">
       {/* Background Image & Overlay */}
@@ -20,33 +25,34 @@ const HeroSection = () => {
         <div className="animate-fade-in-down mb-4 md:mb-6 flex items-center gap-3">
           <span className="hidden md:block h-[1px] w-8 bg-blue-600"></span>
           <p className="text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase font-semibold text-blue-600">
-            Summer Collection 2026
+            {t("Summer Collection 2026")}
           </p>
         </div>
 
         {/* Title: Adjusted font sizes for mobile */}
         <h1 className="mb-6 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.1] max-w-4xl drop-shadow-2xl">
-          The Art Of <br className="hidden sm:block" />
+          {t("The Art Of")} <br className="hidden sm:block" />
           <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
-            Living Well.
+            {t("Living Well.")}
           </span>
         </h1>
 
         {/* Description: Hidden on very small screens or made smaller */}
         <p className="mb-8 md:mb-10 max-w-md text-sm md:text-lg text-gray-300/90 leading-relaxed font-light border-none md:border-l-2 md:border-white/10 md:pl-6">
-          Explore our curated selection of timeless essentials, handpicked for
-          the modern aesthetic. High quality meets minimalist design.
+          {t(
+            "Explore our curated selection of timeless essentials, handpicked forthe modern aesthetic. High quality meets minimalist design."
+          )}
         </p>
 
         {/* Buttons: Stacked on mobile, side-by-side on desktop */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <button className="relative overflow-hidden group/btn rounded-full bg-blue-600 px-10 py-4 text-sm font-bold tracking-wide shadow-lg transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:scale-95">
-            <span className="relative z-10">Shop Now</span>
+            <span className="relative z-10">{t("shop now")}</span>
             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-600 group-hover/btn:translate-x-full"></div>
           </button>
 
           <button className="rounded-full bg-white/10 px-10 py-4 text-sm font-bold backdrop-blur-md border border-white/20 transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 active:scale-95">
-            Explore More
+            {t("Explore More")}
           </button>
         </div>
       </div>
@@ -55,7 +61,7 @@ const HeroSection = () => {
       <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 opacity-50">
         <div className="w-[1px] h-10 md:h-12 bg-gradient-to-b from-white to-transparent"></div>
         <span className="text-[9px] uppercase tracking-widest text-white">
-          Scroll
+          {t("Scroll")}
         </span>
       </div>
     </section>

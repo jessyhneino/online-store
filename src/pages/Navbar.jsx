@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
+
 import {
   ShoppingCart,
   User,
@@ -19,6 +21,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function AdvancedNavbar() {
+  // const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const currentLang = i18n.language.split("-")[0];
+  useEffect(() => {
+    const lang = i18n.resolvedLanguage;
+
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  }, [i18n.resolvedLanguage]);
+
+  const toggleLanguage = () => {
+    const currentLang = i18n.resolvedLanguage;
+    const newLang = currentLang === "en" ? "ar" : "en";
+
+    i18n.changeLanguage(newLang);
+    localStorage.setItem("i18nextLng", newLang); // 👈 مهم
+  };
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -76,24 +95,32 @@ export default function AdvancedNavbar() {
   }, []);
 
   const navLinks = [
-    { name: "Home", path: "/" },
+    { name: t("Home"), path: "/" },
     {
-      name: "Shop",
+      name: t("Shop"),
       path: "/shop",
       hasMegaMenu: true,
       categories: [
         {
-          title: "New Arrivals",
-          items: ["Summer Collection", "Luxury Watches", "Silk Scarves"],
+          title: t("New Arrivals"),
+          items: [
+            t("Summer Collection"),
+            t("Luxury Watches"),
+            t("Silk Scarves"),
+          ],
         },
         {
-          title: "Featured",
-          items: ["Best Sellers", "Limited Edition", "Celebrity Choice"],
+          title: t("Featured"),
+          items: [
+            t("Best Sellers"),
+            t("Limited Edition"),
+            t("Celebrity Choice"),
+          ],
         },
       ],
     },
-    { name: "Deals", path: "/deals" },
-    { name: "About", path: "/about" },
+    { name: t("Deals"), path: "/deals" },
+    { name: t("About"), path: "/about" },
   ];
 
   return (
@@ -121,9 +148,9 @@ export default function AdvancedNavbar() {
                   : "text-gray-900 dark:text-gray-100"
               }`}
             >
-              TELIER
+              {t("TELIER")}
               <span className="font-extralight text-blue-600 dark:text-blue-400">
-                LUXE
+                {t("LUXE")}
               </span>
             </span>
           </Link>
@@ -222,15 +249,15 @@ export default function AdvancedNavbar() {
 
             {/* Language Switcher */}
             <button
-              onClick={() => setLang(lang === "EN" ? "AR" : "EN")}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-zinc-800 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all group"
+              onClick={toggleLanguage}
+              className="flex flex-col items-center gap-1 dark:text-white lg:flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-zinc-800 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all group"
             >
               <Languages
                 size={15}
                 className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600"
               />
               <span className="text-[11px] font-black dark:text-gray-300">
-                {lang}
+                {currentLang === "en" ? "AR" : "EN"}
               </span>
             </button>
 
@@ -238,7 +265,7 @@ export default function AdvancedNavbar() {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={toggleDarkMode}
-              className="hidden lg:flex p-2.5 bg-gray-100 dark:bg-zinc-800 rounded-full text-gray-700 dark:text-yellow-400 hover:ring-2 ring-blue-500/20 transition-all"
+              className="flex flex-col items-center gap-1 dark:text-white lg:flex p-2.5 bg-gray-100 dark:bg-zinc-800 rounded-full text-gray-700 dark:text-yellow-400 hover:ring-2 ring-blue-500/20 transition-all"
             >
               {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
             </motion.button>
@@ -272,7 +299,7 @@ export default function AdvancedNavbar() {
                   >
                     <div className="p-4 bg-gray-50 dark:bg-zinc-800/50 border-b border-gray-100 dark:border-zinc-800">
                       <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">
-                        Account
+                        {t("Account")}
                       </p>
                       <p className="text-sm font-medium dark:text-white">
                         John Doe
@@ -281,12 +308,12 @@ export default function AdvancedNavbar() {
                     <div className="p-2">
                       <UserMenuItem
                         icon={<User size={16} />}
-                        label="Profile"
+                        label={t("Profile")}
                         isDark={isDarkMode}
                       />
                       <UserMenuItem
                         icon={<Bell size={16} />}
-                        label="Notifications"
+                        label={t("Notifications")}
                         isDark={isDarkMode}
                       />
                       <button
@@ -302,7 +329,7 @@ export default function AdvancedNavbar() {
                         ) : (
                           <LogIn size={16} />
                         )}
-                        {isLoggedIn ? "Logout" : "Sign In"}
+                        {isLoggedIn ? "Logout" : t("Sign In")}
                       </button>
                     </div>
                   </motion.div>
@@ -341,7 +368,7 @@ export default function AdvancedNavbar() {
             >
               <div className="flex items-center justify-between mb-8">
                 <span className="font-bold text-xl tracking-tighter dark:text-white">
-                  MENU
+                  {t("MENU")}
                 </span>
                 <button
                   onClick={() => setIsOpen(false)}
@@ -388,16 +415,19 @@ export default function AdvancedNavbar() {
                   >
                     {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
                     <span className="text-[10px] uppercase font-bold text-gray-500">
-                      Mode
+                      {t("Mode")}
                     </span>
                   </button>
                   <button
-                    onClick={() => setLang(lang === "EN" ? "AR" : "EN")}
-                    className="flex flex-col items-center gap-1 dark:text-white"
+                    onClick={toggleLanguage}
+                    className="flex flex-col items-center gap-1 dark:text-white lg:flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-zinc-800 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all group"
                   >
-                    <Languages size={20} />
-                    <span className="text-[10px] uppercase font-bold text-gray-500">
-                      {lang}
+                    <Languages
+                      size={15}
+                      className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600"
+                    />
+                    <span className="text-[11px] font-black dark:text-gray-300">
+                      {currentLang === "en" ? "AR" : "EN"}
                     </span>
                   </button>
                   <div className="relative flex flex-col items-center gap-1">
@@ -406,12 +436,12 @@ export default function AdvancedNavbar() {
                       3
                     </span>
                     <span className="text-[10px] uppercase font-bold text-gray-500">
-                      Cart
+                      {t("Cart")}
                     </span>
                   </div>
                 </div>
                 <button className="w-full bg-black dark:bg-blue-600 text-white py-4 rounded-2xl font-bold transition-transform active:scale-95">
-                  Shop Now
+                  {t("Shop Now")}
                 </button>
               </div>
             </motion.div>
