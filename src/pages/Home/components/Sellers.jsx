@@ -9,8 +9,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const Sellers = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const swiperRef = useRef(null);
+
+  // تحديد الاتجاه الحالي (rtl أو ltr) بناءً على لغة i18next
+  const currentDir = i18n.dir();
 
   const products = [
     {
@@ -68,7 +71,10 @@ const Sellers = () => {
   ];
 
   return (
-    <section className="py-12 px-4 max-w-7xl mx-auto font-sans select-none">
+    <section
+      className="py-12 px-4 max-w-7xl mx-auto font-sans select-none"
+      dir={currentDir}
+    >
       {/* Header Section */}
       <div className="flex justify-between items-center mb-10">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
@@ -77,27 +83,40 @@ const Sellers = () => {
 
         {/* Navigation Buttons */}
         <div className="flex gap-2">
+          {/* زر السابق: في العربي يشير لليمين، في الإنجليزي لليسار */}
           <button
             onClick={() => swiperRef.current?.swiper.slidePrev()}
             className="p-2 border border-gray-200 rounded-full hover:bg-gray-100 active:scale-95 transition-all shadow-sm bg-white"
           >
-            <ChevronLeft className="w-5 h-5 text-gray-600" />
+            {currentDir === "rtl" ? (
+              <ChevronRight className="w-5 h-5 text-gray-600" />
+            ) : (
+              <ChevronLeft className="w-5 h-5 text-gray-600" />
+            )}
           </button>
+
+          {/* زر التالي: في العربي يشير لليسار، في الإنجليزي لليمين */}
           <button
             onClick={() => swiperRef.current?.swiper.slideNext()}
             className="p-2 border border-gray-200 rounded-full hover:bg-gray-100 active:scale-95 transition-all shadow-sm bg-white"
           >
-            <ChevronRight className="w-5 h-5 text-gray-600" />
+            {currentDir === "rtl" ? (
+              <ChevronLeft className="w-5 h-5 text-gray-600" />
+            ) : (
+              <ChevronRight className="w-5 h-5 text-gray-600" />
+            )}
           </button>
         </div>
       </div>
 
       {/* Swiper Slider */}
       <Swiper
+        key={i18n.language} // إجبار المكون على إعادة التشغيل عند تغيير اللغة لحل مشاكل القياسات
+        dir={currentDir} // تحديد اتجاه السحب والحركة (RTL/LTR)
         ref={swiperRef}
         modules={[Navigation]}
         spaceBetween={30}
-        slidesPerView={1} // الافتراضي للموبايل
+        slidesPerView={1}
         breakpoints={{
           440: { slidesPerView: 2 },
           768: { slidesPerView: 3 },
@@ -111,7 +130,11 @@ const Sellers = () => {
               <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 mb-4">
                 {product.tag && (
                   <span
-                    className={`absolute top-4 left-4 z-10 text-[10px] font-bold text-white px-3 py-1 rounded-full uppercase tracking-widest ${product.tagColor}`}
+                    className={`absolute top-4 ${
+                      currentDir === "rtl" ? "right-4" : "left-4"
+                    } z-10 text-[10px] font-bold text-white px-3 py-1 rounded-full uppercase tracking-widest ${
+                      product.tagColor
+                    }`}
                   >
                     {t(product.tag)}
                   </span>
@@ -127,7 +150,7 @@ const Sellers = () => {
                 <span className="text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-widest">
                   {t(product.category)}
                 </span>
-                <h3 className="text-base md:text-lg font-bold text-gray-800 leading-tight group-hover:text-blue-600 transition-colors duration-300 truncate">
+                <h3 className="text-base md:text-lg font-bold text-gray-800 leading-tight group-hover:text-blue-600 transition-colors duration-300 truncate line-clamp-2">
                   {t(product.title)}
                 </h3>
                 <p className="text-blue-600 font-bold text-sm md:text-md">
