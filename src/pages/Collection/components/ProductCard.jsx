@@ -5,7 +5,7 @@ const ProductCard = ({ product }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="group cursor-pointer">
+    <div className="group cursor-grab active:cursor-grabbing pb-4">
       <div className="relative aspect-[4/5] overflow-hidden bg-[#f9f9f9] rounded-sm mb-4">
         <img
           src={product.image}
@@ -29,9 +29,7 @@ const ProductCard = ({ product }) => {
       <div className="flex items-center gap-1.5">
         <Star size={13} className="fill-orange-400 text-orange-400" />
         <span className="text-xs font-bold">{product.rating}</span>
-        <span className="text-xs text-gray-400">
-          ({t("reviews", { count: product.reviews })})
-        </span>
+        <span className="text-xs text-gray-400">({product.reviews})</span>
       </div>
     </div>
   );

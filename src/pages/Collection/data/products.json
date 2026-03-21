@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "name": "Apple iPhone 14",
+    "price": 999,
+    "rating": 4.5,
+    "reviews": 12,
+    "tag": "New",
+    "image": "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?q=80&w=500"
+  },
+  {
+    "id": 2,
+    "name": "Samsung Galaxy S23",
+    "price": 899,
+    "rating": 4.7,
+    "reviews": 34,
+    "tag": "Hot",
+    "image": "https://images.unsplash.com/photo-1678911820864-e2c567c655d7?q=80&w=500"
+  },
+  {
+    "id": 3,
+    "name": "Studio Sound Headphones",
+    "price": 350,
+    "rating": 5.0,
+    "reviews": 215,
+    "tag": "LIMITED EDITION",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500"
+  },
+  {
+    "id": 4,
+    "name": "Essential White Sneaker",
+    "price": 160,
+    "rating": 4.7,
+    "reviews": 310,
+    "image": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=500"
+  },
+  {
+    "id": 5,
+    "name": "iPad Pro M2",
+    "price": 1099,
+    "rating": 4.9,
+    "reviews": 50,
+    "image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=500"
+  },
+
+  {
+    "id": 6,
+    "name": "Structured Wool Coat",
+    "price": 420,
+    "rating": 4.9,
+    "reviews": 128,
+    "tag": "NEW ARRIVAL",
+    "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=500"
+  },
+  {
+    "id": 7,
+    "name": "Heritage Leather Bag",
+    "price": 285,
+    "rating": 4.8,
+    "reviews": 94,
+    "image": "https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=500"
+  },
+
+  {
+    "id": 8,
+    "name": "Titanium Dial Watch",
+    "price": 550,
+    "rating": 4.9,
+    "reviews": 82,
+    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500"
+  },
+  {
+    "id": 9,
+    "name": "Silver Signature Pen",
+    "price": 120,
+    "rating": 4.8,
+    "reviews": 45,
+    "image": "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=500"
+  }
+]

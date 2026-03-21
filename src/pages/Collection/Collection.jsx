@@ -1,72 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
+// استيراد Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+
 import ProductCard from "./components/ProductCard";
 import SidebarFilters from "./components/SidebarFilters";
 import Pagination from "./components/Pagination";
+import productsData from "./data/products.json";
 
 const Collection = () => {
   const { t } = useTranslation();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-  const products = [
-    {
-      id: 1,
-      name: t("Structured Wool Coat"),
-      price: 420,
-      rating: 4.9,
-      reviews: 128,
-      tag: t("NEW ARRIVAL"),
-      image:
-        "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=500",
-    },
-    {
-      id: 2,
-      name: t("Heritage Leather Bag"),
-      price: 285,
-      rating: 4.8,
-      reviews: 94,
-      image:
-        "https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=500",
-    },
-    {
-      id: 3,
-      name: t("Studio Sound Headphones"),
-      price: 350,
-      rating: 5.0,
-      reviews: 215,
-      tag: t("LIMITED EDITION"),
-      image:
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500",
-    },
-    {
-      id: 4,
-      name: t("Essential White Sneaker"),
-      price: 160,
-      rating: 4.7,
-      reviews: 310,
-      image:
-        "https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=500",
-    },
-    {
-      id: 5,
-      name: t("Titanium Dial Watch"),
-      price: 550,
-      rating: 4.9,
-      reviews: 82,
-      image:
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500",
-    },
-    {
-      id: 6,
-      name: t("Silver Signature Pen"),
-      price: 120,
-      rating: 4.8,
-      reviews: 45,
-      image:
-        "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=500",
-    },
-  ];
+  const [activeSlide, setActiveSlide] = useState(0);
+  const swiperRef = useRef(null);
 
   return (
     <div className="min-h-screen bg-white text-[#1a1a1a] antialiased">
@@ -83,7 +33,7 @@ const Collection = () => {
           </p>
         </header>
 
-        {/* Hamburger + "Filters" للموبايل */}
+        {/* Hamburger + "Filters" للموبايل - رجعت مثل ما كانت */}
         <div className="md:hidden">
           <button
             onClick={() => setIsFilterOpen(true)}
@@ -101,14 +51,34 @@ const Collection = () => {
             onClose={() => setIsFilterOpen(false)}
           />
 
-          {/* Products */}
-          <main className="flex-1">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+          {/* Swiper Slider Section */}
+          <main className="flex-1 overflow-hidden">
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
+              onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
+              spaceBetween={30}
+              slidesPerView={1}
+              breakpoints={{
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+              }}
+              className="mySwiper"
+            >
+              {productsData.map((product) => (
+                <SwiperSlide key={product.id}>
+                  <ProductCard product={product} />
+                </SwiperSlide>
               ))}
-            </div>
-            <Pagination />
+            </Swiper>
+
+            {/* Pagination مربوط بالـ Swiper */}
+            <Pagination
+              onNext={() => swiperRef.current?.slideNext()}
+              onPrev={() => swiperRef.current?.slidePrev()}
+              currentSlide={activeSlide}
+              totalSlides={productsData.length}
+            />
           </main>
         </div>
       </div>

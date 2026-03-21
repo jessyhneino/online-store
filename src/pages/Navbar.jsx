@@ -89,29 +89,6 @@ export default function AdvancedNavbar() {
         { title: t("Fragrance"), items: [t("Perfumes"), t("Candles")] },
       ],
     },
-    // {
-    //   name: t("Shop"),
-    //   path: "/shop",
-    //   hasMegaMenu: true,
-    //   categories: [
-    //     {
-    //       title: t("New Arrivals"),
-    //       items: [
-    //         t("Summer Collection"),
-    //         t("Luxury Watches"),
-    //         t("Silk Scarves"),
-    //       ],
-    //     },
-    //     {
-    //       title: t("Featured"),
-    //       items: [
-    //         t("Best Sellers"),
-    //         t("Limited Edition"),
-    //         t("Celebrity Choice"),
-    //       ],
-    //     },
-    //   ],
-    // },
     { name: t("Deals"), path: "/deals" },
     { name: t("About"), path: "/about" },
   ];
@@ -240,10 +217,10 @@ export default function AdvancedNavbar() {
               </button>
             </div>
 
-            {/* Language Switcher */}
+            {/* Language Switcher - HIDDEN ON MOBILE */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-0 py-1.5 border border-gray-200 dark:border-zinc-800 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all group"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-zinc-800 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all group"
             >
               <Languages
                 size={15}
@@ -254,16 +231,16 @@ export default function AdvancedNavbar() {
               </span>
             </button>
 
-            {/* Dark Mode Button */}
+            {/* Dark Mode Button - HIDDEN ON MOBILE */}
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => dispatch(toggleTheme())}
-              className="flex flex-col items-center justify-center w-10 h-10 rounded-full transition-all bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-zinc-800 dark:text-yellow-400 dark:hover:bg-zinc-700"
+              className="hidden lg:flex flex-col items-center justify-center w-10 h-10 rounded-full transition-all bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-zinc-800 dark:text-yellow-400 dark:hover:bg-zinc-700"
             >
               {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
             </motion.button>
 
-            <div className="h-6 w-[1px] bg-gray-200 dark:bg-zinc-800 mx-1 hidden md:block" />
+            <div className="h-6 w-[1px] bg-gray-200 dark:bg-zinc-800 mx-1 hidden lg:block" />
 
             {/* User Account */}
             <div className="relative" ref={menuRef}>
@@ -401,8 +378,9 @@ export default function AdvancedNavbar() {
 
               <div className="border-t dark:border-zinc-800 pt-6 space-y-4">
                 <div className="flex items-center justify-around p-4 bg-gray-50 dark:bg-zinc-800 rounded-2xl">
+                  {/* Mode & Language stay here for Mobile */}
                   <button
-                    onClick={() => dispatch(toggleTheme())} // ✅ يرسل toggleTheme للـ Redux
+                    onClick={() => dispatch(toggleTheme())}
                     className="flex flex-col items-center gap-1 dark:text-yellow-400"
                   >
                     {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
