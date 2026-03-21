@@ -36,22 +36,33 @@ const CuratedCategories = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-12 font-sans">
+    <section
+      className="max-w-7xl mx-auto px-4 py-12 font-sans
+                        dark:bg-zinc-950"
+    >
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
         <div className="max-w-xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2
+            className="text-3xl md:text-4xl font-bold text-gray-900
+                         dark:text-zinc-100 mb-4"
+          >
             {t("Curated Categories")}
           </h2>
-          <p className="text-gray-500 text-lg">
+
+          <p
+            className="text-gray-500 text-lg
+                        dark:text-zinc-400"
+          >
             {t(
               "Navigate through our meticulously organized collections across lifestyle and technology."
             )}
           </p>
         </div>
+
         <a
           href="/collection"
-          className="text-blue-600 font-semibold flex items-center hover:underline group"
+          className="text-blue-600 dark:text-blue-400 font-semibold flex items-center hover:underline group"
         >
           {t("Browse all categories")}
           <span className="ml-2 group-hover:translate-x-1 transition-transform">
@@ -74,8 +85,11 @@ const CuratedCategories = () => {
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
 
-            {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
+            {/* Overlay (محسن للدارك فقط) */}
+            <div
+              className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300
+                            dark:bg-black/40 dark:group-hover:bg-black/60"
+            />
 
             {/* Text Content */}
             <div className="absolute bottom-6 left-6 text-white">

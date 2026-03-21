@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// استيراد ملفات تنسيق Swiper
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -12,7 +11,6 @@ const Sellers = () => {
   const { t, i18n } = useTranslation();
   const swiperRef = useRef(null);
 
-  // تحديد الاتجاه الحالي (rtl أو ltr) بناءً على لغة i18next
   const currentDir = i18n.dir();
 
   const products = [
@@ -72,47 +70,51 @@ const Sellers = () => {
 
   return (
     <section
-      className="py-12 px-4 max-w-7xl mx-auto font-sans select-none"
+      className="py-12 px-4 max-w-7xl mx-auto font-sans select-none
+                 dark:bg-zinc-950"
       dir={currentDir}
     >
-      {/* Header Section */}
+      {/* Header */}
       <div className="flex justify-between items-center mb-10">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+        <h2
+          className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight
+                       dark:text-zinc-100"
+        >
           {t("Best Sellers")}
         </h2>
 
         {/* Navigation Buttons */}
         <div className="flex gap-2">
-          {/* زر السابق: في العربي يشير لليمين، في الإنجليزي لليسار */}
           <button
             onClick={() => swiperRef.current?.swiper.slidePrev()}
-            className="p-2 border border-gray-200 rounded-full hover:bg-gray-100 active:scale-95 transition-all shadow-sm bg-white"
+            className="p-2 border border-gray-200 rounded-full hover:bg-gray-100 active:scale-95 transition-all shadow-sm bg-white
+                       dark:bg-zinc-900 dark:border-zinc-700 dark:hover:bg-zinc-800"
           >
             {currentDir === "rtl" ? (
-              <ChevronRight className="w-5 h-5 text-gray-600" />
+              <ChevronRight className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
             ) : (
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
+              <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
             )}
           </button>
 
-          {/* زر التالي: في العربي يشير لليسار، في الإنجليزي لليمين */}
           <button
             onClick={() => swiperRef.current?.swiper.slideNext()}
-            className="p-2 border border-gray-200 rounded-full hover:bg-gray-100 active:scale-95 transition-all shadow-sm bg-white"
+            className="p-2 border border-gray-200 rounded-full hover:bg-gray-100 active:scale-95 transition-all shadow-sm bg-white
+                       dark:bg-zinc-900 dark:border-zinc-700 dark:hover:bg-zinc-800"
           >
             {currentDir === "rtl" ? (
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
+              <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
             ) : (
-              <ChevronRight className="w-5 h-5 text-gray-600" />
+              <ChevronRight className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
             )}
           </button>
         </div>
       </div>
 
-      {/* Swiper Slider */}
+      {/* Swiper */}
       <Swiper
-        key={i18n.language} // إجبار المكون على إعادة التشغيل عند تغيير اللغة لحل مشاكل القياسات
-        dir={currentDir} // تحديد اتجاه السحب والحركة (RTL/LTR)
+        key={i18n.language}
+        dir={currentDir}
         ref={swiperRef}
         modules={[Navigation]}
         spaceBetween={30}
@@ -127,7 +129,7 @@ const Sellers = () => {
         {products.map((product) => (
           <SwiperSlide key={product.id}>
             <div className="group cursor-pointer">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 mb-4">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 mb-4">
                 {product.tag && (
                   <span
                     className={`absolute top-4 ${
@@ -139,6 +141,7 @@ const Sellers = () => {
                     {t(product.tag)}
                   </span>
                 )}
+
                 <img
                   src={product.image}
                   alt={t(product.title)}
@@ -147,13 +150,15 @@ const Sellers = () => {
               </div>
 
               <div className="space-y-1">
-                <span className="text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-widest">
+                <span className="text-[10px] md:text-[11px] font-semibold text-gray-400 dark:text-zinc-500 uppercase tracking-widest">
                   {t(product.category)}
                 </span>
-                <h3 className="text-base md:text-lg font-bold text-gray-800 leading-tight group-hover:text-blue-600 transition-colors duration-300 truncate line-clamp-2">
+
+                <h3 className="text-base md:text-lg font-bold text-gray-800 dark:text-zinc-200 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 truncate line-clamp-2">
                   {t(product.title)}
                 </h3>
-                <p className="text-blue-600 font-bold text-sm md:text-md">
+
+                <p className="text-blue-600 dark:text-blue-400 font-bold text-sm md:text-md">
                   {product.price}
                 </p>
               </div>

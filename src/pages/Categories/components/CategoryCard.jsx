@@ -46,10 +46,10 @@ const LuxuryGrid = ({ category }) => {
 
   return (
     <div
-      className={`group relative overflow-hidden rounded-2xl bg-gray-200 transition-all duration-500 hover:shadow-2xl ${category.className}`}
+      className={`group relative overflow-hidden rounded-2xl bg-gray-200 dark:bg-zinc-800 transition-all duration-500 hover:shadow-2xl ${category.className}`}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 z-10 bg-black/30 transition-opacity duration-300 group-hover:bg-black/20" />
+      <div className="absolute inset-0 z-10 bg-black/30 dark:bg-black/40 transition-opacity duration-300 group-hover:bg-black/20" />
 
       {/* Background Image */}
       <img
@@ -81,7 +81,7 @@ const LuxuryGrid = ({ category }) => {
 
 const CategoryCard = () => {
   return (
-    <section className="min-h-screen bg-gray-50 px-4 py-12 md:px-10">
+    <section className="min-h-screen bg-gray-50 dark:bg-zinc-900 px-4 py-12 md:px-10 transition-colors duration-500">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-[400px_400px_350px]">
           {categories.map((cat, index) => (

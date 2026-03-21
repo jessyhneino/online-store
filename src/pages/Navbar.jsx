@@ -96,10 +96,10 @@ export default function AdvancedNavbar() {
   return (
     <>
       <nav
-        className={`fixed w-full z-[100] transition-all duration-500 border-b ${
+        className={`fixed w-full z-[100] transition-all duration-500 border-b dark:bg-black dark:shadow-[0_8px_20px_-4px_rgba(255,255,255,0.08)] ${
           isScrolled
-            ? "bg-white/90 py-3 border-gray-200 shadow-md backdrop-blur-md dark:bg-black/90 dark:border-blue-500"
-            : "bg-transparent py-6 border-transparent dark:bg-black/70 dark:border-blue-500"
+            ? "bg-white/90 py-3 border-gray-200 shadow-md backdrop-blur-md dark:bg-black/90 dark:border-black"
+            : "bg-transparent py-6 border-transparent dark:border-black"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
