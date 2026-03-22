@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -129,39 +130,41 @@ const Sellers = () => {
         {products.map((product) => (
           <SwiperSlide key={product.id}>
             <div className="group cursor-pointer">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 mb-4">
-                {product.tag && (
-                  <span
-                    className={`absolute top-4 ${
-                      currentDir === "rtl" ? "right-4" : "left-4"
-                    } z-10 text-[10px] font-bold text-white px-3 py-1 rounded-full uppercase tracking-widest ${
-                      product.tagColor
-                    }`}
-                  >
-                    {t(product.tag)}
+              <Link to={`/curator/${product.id}`}>
+                <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 mb-4">
+                  {product.tag && (
+                    <span
+                      className={`absolute top-4 ${
+                        currentDir === "rtl" ? "right-4" : "left-4"
+                      } z-10 text-[10px] font-bold text-white px-3 py-1 rounded-full uppercase tracking-widest ${
+                        product.tagColor
+                      }`}
+                    >
+                      {t(product.tag)}
+                    </span>
+                  )}
+
+                  <img
+                    src={product.image}
+                    alt={t(product.title)}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <span className="text-[10px] md:text-[11px] font-semibold text-gray-400 dark:text-zinc-500 uppercase tracking-widest">
+                    {t(product.category)}
                   </span>
-                )}
 
-                <img
-                  src={product.image}
-                  alt={t(product.title)}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
+                  <h3 className="text-base md:text-lg font-bold text-gray-800 dark:text-zinc-200 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 truncate line-clamp-2">
+                    {t(product.title)}
+                  </h3>
 
-              <div className="space-y-1">
-                <span className="text-[10px] md:text-[11px] font-semibold text-gray-400 dark:text-zinc-500 uppercase tracking-widest">
-                  {t(product.category)}
-                </span>
-
-                <h3 className="text-base md:text-lg font-bold text-gray-800 dark:text-zinc-200 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 truncate line-clamp-2">
-                  {t(product.title)}
-                </h3>
-
-                <p className="text-blue-600 dark:text-blue-400 font-bold text-sm md:text-md">
-                  {product.price}
-                </p>
-              </div>
+                  <p className="text-blue-600 dark:text-blue-400 font-bold text-sm md:text-md">
+                    {product.price}
+                  </p>
+                </div>
+              </Link>
             </div>
           </SwiperSlide>
         ))}

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../store/themeSlice";
+import { ShoppingCart as ShoppingCartIcon } from "lucide-react";
 import {
-  ShoppingCart,
   User,
   Search,
   Menu,
@@ -240,6 +240,17 @@ export default function AdvancedNavbar() {
               {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
             </motion.button>
 
+            {/* Cart Icon - ADDED FOR DESKTOP */}
+            <Link
+              to="/cart"
+              className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-zinc-800 relative hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all"
+            >
+              <ShoppingCartIcon size={18} className="dark:text-white" />
+              <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">
+                3
+              </span>
+            </Link>
+
             <div className="h-6 w-[1px] bg-gray-200 dark:bg-zinc-800 mx-1 hidden lg:block" />
 
             {/* User Account */}
@@ -401,13 +412,15 @@ export default function AdvancedNavbar() {
                     </span>
                   </button>
                   <div className="relative flex flex-col items-center gap-1">
-                    <ShoppingCart size={20} className="dark:text-white" />
-                    <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">
-                      3
-                    </span>
-                    <span className="text-[10px] uppercase font-bold text-gray-500">
-                      {t("Cart")}
-                    </span>
+                    <Link to="/cart">
+                      <ShoppingCartIcon size={20} className="dark:text-white" />
+                      <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">
+                        3
+                      </span>
+                      <span className="text-[10px] uppercase font-bold text-gray-500">
+                        {t("Cart")}
+                      </span>
+                    </Link>
                   </div>
                 </div>
                 <button className="w-full bg-black dark:bg-blue-600 text-white py-4 rounded-2xl font-bold active:scale-95 transition-transform">

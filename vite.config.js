@@ -7,4 +7,12 @@ export default defineConfig({
   plugins: [react(),
     tailwindcss(),
   ],
+  theme: {
+  extend: {
+    fontFamily: {
+      serif: ['Playfair Display', 'serif'],
+      sans: ['Inter', 'sans-serif'],
+    },
+  },
+}
 })

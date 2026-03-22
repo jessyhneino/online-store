@@ -7,6 +7,8 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home/Home.jsx";
 import Categories from "./pages/Categories/Categories.jsx";
 import Collection from "./pages/Collection/Collection.jsx";
+import Curator from "./pages/Curator/Curator.jsx";
+import ShoppingCart from "./pages/ShoppingCart/ShoppingCart.jsx";
 
 function App() {
   const { i18n } = useTranslation();
@@ -36,6 +38,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="categories" element={<Categories />} />
           <Route path="collection" element={<Collection />} />
+          <Route path="curator/:id" element={<Curator />} />
+          <Route path="cart" element={<ShoppingCart />} />
         </Route>
       </Routes>
     </BrowserRouter>
