@@ -269,9 +269,9 @@ const ShoppingCart = () => {
 
               <hr className="my-4 border-gray-100 dark:border-zinc-700" />
 
-              <button className="w-full bg-blue-600 dark:bg-blue-500 text-white rounded-2xl py-4 font-bold flex items-center justify-center gap-3 hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-lg active:scale-[0.98]">
+              <Link to="/checkout" className="w-full bg-blue-600 dark:bg-blue-500 text-white rounded-2xl py-4 font-bold flex items-center justify-center gap-3 hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-lg active:scale-[0.98]">
                 {t("proceed_to_checkout")} <ArrowRight size={18} />
-              </button>
+              </Link>
             </div>
           </div>
         )}
