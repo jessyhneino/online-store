@@ -10,6 +10,7 @@ import Collection from "./pages/Collection/Collection.jsx";
 import Curator from "./pages/Curator/Curator.jsx";
 import ShoppingCart from "./pages/ShoppingCart/ShoppingCart.jsx";
 import CheckOut from "./pages/CheckOut/CheckOut.jsx";
+import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 
 function App() {
   const { i18n } = useTranslation();
@@ -42,6 +43,7 @@ function App() {
           <Route path="curator/:id" element={<Curator />} />
           <Route path="cart" element={<ShoppingCart />} />
           <Route path="checkout" element={<CheckOut />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

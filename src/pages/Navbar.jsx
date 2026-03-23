@@ -288,11 +288,13 @@ export default function AdvancedNavbar() {
                       </p>
                     </div>
                     <div className="p-2">
-                      <UserMenuItem
-                        icon={<User size={16} />}
-                        label={t("Profile")}
-                        isDark={isDarkMode}
-                      />
+                      <Link to="/profile">
+                        <UserMenuItem
+                          icon={<User size={16} />}
+                          label={t("Profile")}
+                          isDark={isDarkMode}
+                        />
+                      </Link>
                       <UserMenuItem
                         icon={<Bell size={16} />}
                         label={t("Notifications")}
