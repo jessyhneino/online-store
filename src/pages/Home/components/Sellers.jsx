@@ -77,12 +77,15 @@ const Sellers = () => {
     >
       {/* Header */}
       <div className="flex justify-between items-center mb-10">
-        <h2
-          className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight
+        <div className="flex flex-col">
+          <h2
+            className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight
                        dark:text-zinc-100"
-        >
-          {t("Best Sellers")}
-        </h2>
+          >
+            {t("Best Sellers")}
+          </h2>
+          <p className="text-left mt-6">CLick any product to show details</p>
+        </div>
 
         {/* Navigation Buttons */}
         <div className="flex gap-2">

@@ -89,7 +89,8 @@ export default function AdvancedNavbar() {
         { title: t("Fragrance"), items: [t("Perfumes"), t("Candles")] },
       ],
     },
-    { name: t("Deals"), path: "/deals" },
+    { name: t("Products"), path: "/collection" },
+    { name: t("Wishlist"), path: "/wishlist" },
     { name: t("About"), path: "/about" },
   ];
 

@@ -58,7 +58,7 @@ const HeroSection = () => {
             className="rounded-full bg-white/10 px-10 py-4 text-sm font-bold backdrop-blur-md border border-white/20 transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 active:scale-95 inline-block text-center
                        dark:bg-white/10 dark:border-white/20 dark:hover:bg-white/20 dark:hover:border-white/40"
           >
-            {t("Explore More")}
+            {t("Show Product")}
           </Link>
         </div>
       </div>
