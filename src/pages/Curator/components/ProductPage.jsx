@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Star, Truck, ShieldCheck, Minus, Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   const { t } = useTranslation();
@@ -162,9 +163,9 @@ const ProductPage = () => {
               </button>
             </div>
 
-            <button className="w-full border text-blue-600 font-bold text-xs uppercase h-14">
+            <Link to="/checkout" className="flex justify-center items-center w-full border text-blue-600 text-center font-bold text-xs uppercase h-14">
               {t("Express Checkout")}
-            </button>
+            </Link>
 
             {/* Features */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6">
