@@ -145,25 +145,36 @@ const ProductPage = () => {
             </div>
 
             {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex items-center border h-14">
-                <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+            <div className="flex flex-col sm:flex-row items-stretch gap-3">
+              {/* Quantity Selector */}
+              <div className="flex items-center justify-between border rounded-lg h-14 px-4 w-full sm:w-40">
+                <button
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="p-2 hover:bg-gray-100 rounded-md transition"
+                >
                   <Minus size={16} />
                 </button>
 
-                <span className="flex-1 text-center">{quantity}</span>
+                <span className="text-sm font-medium">{quantity}</span>
 
-                <button onClick={() => setQuantity(quantity + 1)}>
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="p-2 hover:bg-gray-100 rounded-md transition"
+                >
                   <Plus size={16} />
                 </button>
               </div>
 
-              <button className="flex-1 bg-black text-white font-bold text-xs uppercase h-14">
+              {/* Add to Bag Button */}
+              <button className="flex-1 h-14 p-[20px] rounded-lg bg-black text-white text-sm font-semibold uppercase tracking-wide hover:bg-gray-900 transition">
                 {t("Add to Bag")}
               </button>
             </div>
 
-            <Link to="/checkout" className="flex justify-center items-center w-full border text-blue-600 text-center font-bold text-xs uppercase h-14">
+            <Link
+              to="/checkout"
+              className="flex justify-center items-center w-full border text-blue-600 text-center font-bold text-xs uppercase h-14"
+            >
               {t("Express Checkout")}
             </Link>
 

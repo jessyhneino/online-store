@@ -289,5 +289,19 @@
   "shipping_address": "عنوان الشحن",
   "history_title": "سجل الطلبات",
   "total_label": "الإجمالي",
-  "awaiting_processing": "في انتظار المعالجة"
+  "awaiting_processing": "في انتظار المعالجة",
+  "Connect with": "تواصل مع",
+  "The Curators.": "المنسقين.",
+  "Whether you're seeking product advice or have a question about your order, our dedicated concierge team is here to assist you with the same precision we apply to our collection.": "سواء كنت تبحث عن نصيحة حول المنتجات أو لديك سؤال بخصوص طلبك، فإن فريقنا المختص جاهز لمساعدتك بنفس الدقة التي نطبقها على مجموعتنا.",
+  "Our Studio": "استوديو الخاص بنا",
+  "Direct Channels": "قنوات التواصل المباشر",
+  "Follow Our Story": "تابع قصتنا",
+  "View on map": "عرض على الخريطة",
+  "Full Name": "الاسم الكامل",
+  "Email Address": "البريد الإلكتروني",
+  "Your Inquiry": "استفسارك",
+  "How can we help you today?": "كيف يمكننا مساعدتك اليوم؟",
+  "Send Message": "إرسال الرسالة",
+  "John Doe": "الاسم الكامل",
+  "john@example.com": "example@email.com"
 }

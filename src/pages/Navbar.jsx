@@ -91,7 +91,7 @@ export default function AdvancedNavbar() {
     },
     { name: t("Products"), path: "/collection" },
     { name: t("Wishlist"), path: "/wishlist" },
-    { name: t("About"), path: "/about" },
+    { name: t("ContactUs"), path: "/contactpage" },
   ];
 
   return (

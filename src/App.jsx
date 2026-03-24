@@ -11,6 +11,9 @@ import Curator from "./pages/Curator/Curator.jsx";
 import ShoppingCart from "./pages/ShoppingCart/ShoppingCart.jsx";
 import CheckOut from "./pages/CheckOut/CheckOut.jsx";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
+import ContactPage from "./pages/ContactPage/ContactPage.jsx";
+import ScrollToTop from "./utils/ScrollToTop.jsx";
+import SimpleLayout from "./layouts/SimpleLayout.jsx";
 
 function App() {
   const { i18n } = useTranslation();
@@ -35,6 +38,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
@@ -43,6 +47,12 @@ function App() {
           <Route path="curator/:id" element={<Curator />} />
           <Route path="cart" element={<ShoppingCart />} />
           <Route path="checkout" element={<CheckOut />} />
+          {/* <Route path="profile" element={<ProfilePage />} /> */}
+          <Route path="contactpage" element={<ContactPage />} />
+        </Route>
+
+        {/* صفحة ProfilePage بدون Navbar و Footer */}
+        <Route element={<SimpleLayout />}>
           <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Routes>
