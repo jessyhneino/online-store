@@ -295,11 +295,13 @@ export default function AdvancedNavbar() {
                           isDark={isDarkMode}
                         />
                       </Link>
-                      <UserMenuItem
-                        icon={<Bell size={16} />}
-                        label={t("Notifications")}
-                        isDark={isDarkMode}
-                      />
+                      <Link to="/notification">
+                        <UserMenuItem
+                          icon={<Bell size={16} />}
+                          label={t("Notifications")}
+                          isDark={isDarkMode}
+                        />
+                      </Link>
                       <button
                         onClick={() => setIsLoggedIn(!isLoggedIn)}
                         className={`flex items-center gap-3 w-full p-3 text-sm rounded-xl transition-colors ${
@@ -313,7 +315,11 @@ export default function AdvancedNavbar() {
                         ) : (
                           <LogIn size={16} />
                         )}
-                        {isLoggedIn ? "Logout" : t("Sign In")}
+                        {isLoggedIn ? (
+                          <Link to="/">{t("Logout")}</Link>
+                        ) : (
+                          <Link to="/signin"> {t("Sign In")}</Link>
+                        )}
                       </button>
                     </div>
                   </motion.div>

@@ -8,14 +8,20 @@ import App from "./App.jsx";
 import "./i18n";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-import { setInitialTheme } from "./store/themeSlice"; // ✅ استيراد setInitialTheme
 
-// ✅ ضبط الثيم عند أول تحميل
+// 1. استيراد الـ Providers (تأكد من صحة المسارات)
+import { WishlistProvider } from "./context/WishlistContext";
+import { CartProvider } from "./context/CartContext"; // استيراد الـ CartProvider الجديد
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <App />
+      {/* تغليف التطبيق بـ WishlistProvider و CartProvider */}
+      <WishlistProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </WishlistProvider>
     </Provider>
   </StrictMode>
 );

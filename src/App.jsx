@@ -14,6 +14,11 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 import ContactPage from "./pages/ContactPage/ContactPage.jsx";
 import ScrollToTop from "./utils/ScrollToTop.jsx";
 import SimpleLayout from "./layouts/SimpleLayout.jsx";
+import SignIn from "./pages/SignIn/SignIn.jsx";
+import SignUp from "./pages/SignUp/SignUp.jsx";
+import WishList from "./pages/WishList/WishList.jsx";
+import NotificationsPage from "./pages/Notification/NotificationsPage.jsx";
+import Invoice from "./pages/Invoice/Invoice.jsx";
 
 function App() {
   const { i18n } = useTranslation();
@@ -49,6 +54,11 @@ function App() {
           <Route path="checkout" element={<CheckOut />} />
           {/* <Route path="profile" element={<ProfilePage />} /> */}
           <Route path="contactpage" element={<ContactPage />} />
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="wishlist" element={<WishList />} />
+          <Route path="notification" element={<NotificationsPage />} />
+          <Route path="invoice" element={<Invoice />} />
         </Route>
 
         {/* صفحة ProfilePage بدون Navbar و Footer */}
