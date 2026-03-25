@@ -84,7 +84,7 @@ const Sellers = () => {
           >
             {t("Best Sellers")}
           </h2>
-          <p className="text-left mt-6">CLick any product to show details</p>
+          <p className="text-left mt-6">{t("CLick any product to show details")}</p>
         </div>
 
         {/* Navigation Buttons */}

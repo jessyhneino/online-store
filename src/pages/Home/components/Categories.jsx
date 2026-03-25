@@ -61,7 +61,7 @@ const CuratedCategories = () => {
         </div>
 
         <a
-          href="/collection"
+          href="/categories"
           className="text-blue-600 dark:text-blue-400 font-semibold flex items-center hover:underline group"
         >
           {t("Browse all categories")}

@@ -77,7 +77,7 @@ const ProfilePage = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed z-[100] md:z-[0] md:static top-0 left-0 h-full w-72 bg-white dark:bg-zinc-900 p-6 pt-[30px] border-r border-gray-100 dark:border-zinc-800 flex flex-col justify-between transform transition-transform duration-300 ease-in-out ${
+        className={`fixed z-[100] md:z-[0] md:static top-0 left-0 h-full w-72 bg-white dark:bg-zinc-900 px-6 py-[50px] border-r border-gray-100 dark:border-zinc-800 flex flex-col justify-between transform transition-transform duration-300 ease-in-out ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
@@ -114,21 +114,27 @@ const ProfilePage = () => {
               label={t("profile_info")}
               active
             />
-            <NavItem icon={<Package size={18} />} label={t("orders")} />
-            <NavItem icon={<Heart size={18} />} label={t("wishlist")} />
-            <NavItem icon={<Settings size={18} />} label={t("settings")} />
+            <Link to="/">
+              <NavItem icon={<Package size={18} />} label={t("Home")} />
+            </Link>
+            <Link to="/wishlist">
+              <NavItem icon={<Heart size={18} />} label={t("Wishlist")} />
+            </Link>
+            <NavItem icon={<Settings size={18} />} label={t("Settings")} />
           </nav>
         </div>
 
         {/* Logout */}
         <button className="flex items-center space-x-3 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all py-3 px-4 rounded-xl group mt-auto">
           <LogOut size={18} />
-          <span className="font-semibold text-sm">{t("sign_out")}</span>
+          <Link to="/">
+            <span className="font-semibold text-sm">{t("sign_out")}</span>
+          </Link>
         </button>
       </aside>
 
       {/* Main */}
-      <main className="flex-1 p-4 md:p-10 max-w-5xl mx-auto w-full">
+      <main className="flex-1 p-6 md:p-10 max-w-5xl mx-auto w-full">
         {/* Personal Details */}
         <section className="bg-white dark:bg-zinc-800 rounded-3xl p-6 md:p-8 shadow-sm border border-gray-50 dark:border-zinc-700 mb-8 transition-colors">
           <div className="flex justify-between items-center mb-8">
@@ -143,10 +149,7 @@ const ProfilePage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
             <DetailItem label={t("full_name")} value="Julian Barnes" />
-            <DetailItem
-              label={t("email")}
-              value="j.barnes@curator.com"
-            />
+            <DetailItem label={t("email")} value="j.barnes@curator.com" />
             <DetailItem
               label={t("shipping_address")}
               value="221B Baker Street, London, UK"

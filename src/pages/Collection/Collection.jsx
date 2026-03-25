@@ -12,9 +12,9 @@ const Collection = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-gray-100 antialiased transition-colors duration-500">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-35 py-8">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-35 py-6">
         {/* Header Section - Modern & Clean */}
-        <header className="mb-12 border-b border-gray-100 dark:border-zinc-800 pb-10">
+        <header className=" border-b border-gray-100 dark:border-zinc-800 pb-6">
           <div className="flex flex-col md:flex-row justify-between items-end gap-6">
             <div className="max-w-2xl">
               <nav className="text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-4 flex gap-2">
@@ -95,7 +95,7 @@ const Collection = () => {
 
             {/* Modern Footer Pagination Replacement */}
             {productsData.length > 0 && (
-              <div className="mt-24 flex flex-col items-center justify-center border-t border-gray-100 dark:border-zinc-900 pt-16">
+              <div className=" flex flex-col items-center justify-center border-t border-gray-100 dark:border-zinc-900 pt-6">
                 <p className="text-gray-400 text-sm mb-6 uppercase tracking-[0.3em]">
                   {t("Showing")} {productsData.length} {t("of")}{" "}
                   {productsData.length} {t("Products")}
@@ -113,7 +113,12 @@ const Collection = () => {
                       {t("Back to Top")}
                     </button>
                   </span>
-                  <div className="w-[1px] h-12 bg-gray-300 dark:bg-zinc-700 group-hover:h-16 transition-all"></div>
+                  <button
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
+                    className="w-[1px] h-12 bg-black dark:bg-zinc-700 group-hover:h-16 transition-all"
+                  ></button>
                 </button>
               </div>
             )}
@@ -122,7 +127,7 @@ const Collection = () => {
       </div>
 
       {/* Footer */}
-      <footer className="py-20 bg-gray-50 dark:bg-zinc-950 mt-20 border-t border-gray-100 dark:border-zinc-900">
+      <footer className="py-6 bg-gray-50 dark:bg-zinc-950 border-t border-gray-100 dark:border-zinc-900">
         <div className="text-center">
           <h2 className="text-2xl font-black italic mb-4">MINIMALIST.</h2>
           <p className="text-[10px] text-gray-400 tracking-[0.5em] uppercase">

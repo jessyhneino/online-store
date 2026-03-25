@@ -55,7 +55,7 @@ const ProductPage = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 font-sans text-zinc-900 dark:text-gray-200 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-4 py-8 md:py-16">
+      <div className="max-w-7xl mx-auto px-6 py-6 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Images Section */}
           <div className="space-y-6">
@@ -173,7 +173,7 @@ const ProductPage = () => {
             <div className="flex flex-col sm:flex-row items-stretch gap-3">
               {/* Quantity Selector - يتم تعطيله إذا أضيف للمنتج */}
               <div
-                className={`flex items-center justify-between border rounded-lg h-14 px-4 w-full sm:w-40 transition-opacity ${
+                className={`flex items-center justify-between border rounded-lg h-14 px-4 mb-4 w-full sm:w-40 transition-opacity ${
                   alreadyInCart ? "opacity-50 pointer-events-none" : ""
                 }`}
               >
@@ -196,7 +196,7 @@ const ProductPage = () => {
               <button
                 disabled={alreadyInCart}
                 onClick={handleAddToCart}
-                className={`flex-1 h-14 rounded-lg text-sm font-semibold uppercase tracking-wide transition-all flex items-center justify-center gap-3 ${
+                className={`flex-1 h-14 rounded-lg p-[20px] text-sm font-semibold uppercase tracking-wide transition-all flex items-center justify-center gap-3 ${
                   alreadyInCart
                     ? "bg-green-600 text-white cursor-default"
                     : "bg-black text-white hover:bg-zinc-800 active:scale-[0.98]"
@@ -219,7 +219,7 @@ const ProductPage = () => {
             {/* Express Checkout */}
             <Link
               to="/checkout"
-              className="flex justify-center items-center w-full border border-zinc-200 dark:border-zinc-700 text-blue-600 text-center font-bold text-xs uppercase h-14 hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-colors"
+              className="flex justify-center items-center w-full border border-blue-600 dark:border-zinc-700 text-blue-600 text-center font-bold text-xs uppercase h-14 hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-colors"
             >
               {t("Express Checkout")}
             </Link>

@@ -7,7 +7,7 @@ const NewsLetter = () => {
 
   return (
     <section
-      className="bg-gray-50 py-16 px-6 sm:py-24
+      className="bg-gray-50 py-12 px-6 sm:py-24
                         dark:bg-zinc-950"
     >
       <div className="max-w-4xl mx-auto text-center">

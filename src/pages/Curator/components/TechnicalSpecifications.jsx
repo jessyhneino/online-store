@@ -14,10 +14,10 @@ const TechnicalSpecifications = () => {
   ];
 
   return (
-    <section className="bg-[#f9f9f9] dark:bg-zinc-900 min-h-screen flex items-center justify-center px-6 md:px-12 font-sans transition-colors duration-500">
+    <section className="bg-[#f9f9f9] dark:bg-zinc-900 flex justify-center px-6 py-6 md:px-6 md:py-16 font-sans transition-colors duration-500">
       <div className="max-w-5xl w-full">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-6">
           <span className="text-blue-600 dark:text-blue-400 font-bold tracking-[0.3em] text-xs uppercase mb-3 block transition-colors">
             {t("The Blueprint")}
           </span>

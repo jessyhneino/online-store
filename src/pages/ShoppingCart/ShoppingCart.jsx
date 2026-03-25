@@ -32,8 +32,8 @@ const ShoppingCart = () => {
   const total = subtotal + tax;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 pt-12 md:py-12 px-4 sm:px-6 lg:px-8 font-sans text-slate-900 dark:text-gray-200 transition-colors duration-500">
-      <div className="max-w-6xl mx-auto">
+    <div className=" bg-gray-50 dark:bg-zinc-900 md:py-8 px-6 py-6 sm:px-6 lg:px-8 font-sans text-slate-900 dark:text-gray-200 transition-colors duration-500">
+      <div className="max-w-6xl mx-auto lg:mx-28">
         {/* Header */}
         <div className="mb-10">
           <h1 className="text-4xl font-extrabold tracking-tight mb-2">

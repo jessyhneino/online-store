@@ -81,8 +81,8 @@ const LuxuryGrid = ({ category }) => {
 
 const CategoryCard = () => {
   return (
-    <section className="min-h-screen bg-gray-50 dark:bg-zinc-900 px-4 py-12 md:px-10 transition-colors duration-500">
-      <div className="mx-auto max-w-7xl">
+    <section className="min-h-screen bg-gray-50 dark:bg-zinc-900 px-6 py-6 md:px-10 transition-colors duration-500">
+      <div className=" mx-auto lg:mx-25 max-w-7xl">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-[400px_400px_350px]">
           {categories.map((cat, index) => (
             <LuxuryGrid key={index} category={cat} />

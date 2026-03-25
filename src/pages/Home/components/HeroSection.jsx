@@ -49,7 +49,10 @@ const HeroSection = () => {
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <button className="relative overflow-hidden group/btn rounded-full bg-blue-600 px-10 py-4 text-sm font-bold tracking-wide shadow-lg transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:scale-95">
-            <span className="relative z-10">{t("shop now")}</span>
+            <Link to="/collection">
+              <span className="relative z-10">{t("shop now")}</span>
+            </Link>
+
             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-600 group-hover/btn:translate-x-full"></div>
           </button>
 
@@ -58,7 +61,7 @@ const HeroSection = () => {
             className="rounded-full bg-white/10 px-10 py-4 text-sm font-bold backdrop-blur-md border border-white/20 transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 active:scale-95 inline-block text-center
                        dark:bg-white/10 dark:border-white/20 dark:hover:bg-white/20 dark:hover:border-white/40"
           >
-            {t("Show Product")}
+            {t("Show Products")}
           </Link>
         </div>
       </div>

@@ -25,7 +25,7 @@ const SidebarFilters = ({ isOpen, onClose }) => {
 
       <aside
         className={`!p-[20px]
-          fixed inset-x-0 bottom-0 z-50 bg-white dark:bg-zinc-900 p-4 rounded-t-3xl shadow-2xl dark:shadow-zinc-800/50 transition-transform duration-300 ease-in-out transform
+          fixed inset-x-0 bottom-0 z-50 !bg-gray-200 dark:bg-zinc-900 p-4 rounded-t-3xl shadow-2xl dark:shadow-zinc-800/50 transition-transform duration-300 ease-in-out transform
           md:relative md:inset-auto md:p-0 md:bg-transparent md:shadow-none md:translate-y-0 md:block md:w-64
           ${isOpen ? "translate-y-0" : "translate-y-full md:translate-y-0"}
           space-y-6

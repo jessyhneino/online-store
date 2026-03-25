@@ -35,9 +35,9 @@ const VerifiedCurators = () => {
   );
 
   return (
-    <div className="bg-white dark:bg-zinc-900 min-h-screen p-6 md:p-12 lg:p-20 font-sans text-[#1a1a1a] dark:text-gray-200 transition-colors duration-500">
+    <div className="bg-white dark:bg-zinc-900 min-h-screen p-6 md:p-12 lg:py-16 lg:px-6 font-sans text-[#1a1a1a] dark:text-gray-200 transition-colors duration-500">
       {/* Header */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+      <div className="max-w-7xl mx-auto md:mx-28 flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
         <div>
           <span className="text-blue-600 dark:text-blue-400 text-[10px] font-bold tracking-[0.2em] uppercase">
             {t("Social Perspective")}
@@ -61,7 +61,7 @@ const VerifiedCurators = () => {
       {/* Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Featured Review */}
-        <div className="lg:col-span-2 bg-[#fcfcfc] dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700 rounded-[2rem] p-8 md:p-12 flex flex-col justify-between min-h-[400px] shadow-sm transition-colors">
+        <div className="lg:col-span-2 bg-[#fcfcfc] dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700 rounded-[2rem] p-8 md:py-12 md:mx-6 flex flex-col justify-between min-h-[400px] shadow-sm transition-colors">
           <div>
             <StarRating />
             <blockquote className="text-2xl md:text-4xl italic font-serif leading-snug text-gray-800 dark:text-gray-100">
@@ -91,7 +91,7 @@ const VerifiedCurators = () => {
           {reviews.map((review) => (
             <div
               key={review.id}
-              className="bg-[#f8f8f8] dark:bg-zinc-800 rounded-[1.5rem] p-8 flex flex-col justify-between h-full border border-transparent hover:border-gray-200 dark:hover:border-zinc-600 transition-colors"
+              className="bg-[#f8f8f8] dark:bg-zinc-800 rounded-[1.5rem] p-8 md:mx-6 flex flex-col justify-between h-full border border-transparent hover:border-gray-200 dark:hover:border-zinc-600 transition-colors"
             >
               <div>
                 <StarRating />

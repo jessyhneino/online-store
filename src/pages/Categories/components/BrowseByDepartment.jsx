@@ -5,7 +5,7 @@ const BrowseByDepartment = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="bg-[#f8f9fa] dark:bg-zinc-900 py-16 px-6 md:py-24 md:px-12 lg:px-24 transition-colors duration-500">
+    <section className="bg-[#f8f9fa] dark:bg-zinc-900 py-6 px-6 md:py-12 md:px-12 lg:pl-25 transition-colors duration-500">
       <div className="max-w-7xl mx-auto">
         {/* العنوان الصغير العلوي */}
         <span className="block text-[#a07e4d] dark:text-[#d6b38f] text-xs font-bold tracking-[0.2em] uppercase mb-4 transition-colors duration-500">

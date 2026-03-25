@@ -8,6 +8,7 @@ import {
   Truck,
   ShoppingCart,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CheckOut = () => {
   const { t } = useTranslation();
@@ -270,9 +271,12 @@ const CheckOut = () => {
                 </div>
               </div>
             </section>
-            <button className="w-full md:w-auto md:float-right bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-blue-200/50 dark:shadow-blue-900/30 transition-all transform hover:-translate-y-1 active:scale-95">
+            <Link
+              to="/invoice"
+              className="w-full md:w-auto md:float-right bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-blue-200/50 dark:shadow-blue-900/30 transition-all transform hover:-translate-y-1 active:scale-95"
+            >
               {t("complete_purchase")}
-            </button>
+            </Link>
           </div>
 
           {/* Sidebar */}

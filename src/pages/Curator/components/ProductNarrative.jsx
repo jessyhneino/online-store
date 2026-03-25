@@ -5,8 +5,8 @@ const ProductNarrative = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="bg-white dark:bg-zinc-900 py-16 md:py-24 font-sans text-gray-900 dark:text-gray-200 overflow-hidden transition-colors duration-500">
-      <div className="max-w-7xl mx-auto pr-6 pl-12 md:pr-6 md:pl-12 lg:pr-10 lg:pl-20">
+    <section className="bg-white dark:bg-zinc-900 py-6 md:py-16 font-sans text-gray-900 dark:text-gray-200 overflow-hidden transition-colors duration-500">
+      <div className="max-w-7xl mx-auto pr-6 pl-12 md:pr-6 md:pl-12 lg:pr-10 lg:pl-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* قسم الصور المعدل */}
           <div className="relative flex items-center justify-center lg:justify-start w-full">

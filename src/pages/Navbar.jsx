@@ -388,7 +388,7 @@ export default function AdvancedNavbar() {
                     key={link.name}
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className="text-xl font-bold text-gray-800 dark:text-gray-100 flex items-center justify-between py-2 border-b border-gray-50 dark:border-zinc-800"
+                    className="text-xl font-bold text-gray-800 dark:text-gray-100 flex items-center justify-between py-2 px-2 border-b border-gray-50 dark:border-zinc-800"
                   >
                     {link.name}
                     <ArrowRight size={20} className="text-blue-600" />
