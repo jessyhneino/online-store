@@ -120,7 +120,9 @@ const ProfilePage = () => {
             <Link to="/wishlist">
               <NavItem icon={<Heart size={18} />} label={t("Wishlist")} />
             </Link>
-            <NavItem icon={<Settings size={18} />} label={t("Settings")} />
+            <Link to="/orders">
+              <NavItem icon={<Settings size={18} />} label={t("Orders")} />
+            </Link>
           </nav>
         </div>
 

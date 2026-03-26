@@ -105,7 +105,7 @@ const Invoice = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-zinc-900 py-12 px-4 sm:px-6 lg:px-8 font-sans text-slate-900 dark:text-gray-100 transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-zinc-900 py-6 px-6 sm:px-6 lg:px-8 font-sans text-slate-900 dark:text-gray-100 transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
         {/* Actions Bar */}
         <div className="flex justify-between items-center mb-8 print:hidden">

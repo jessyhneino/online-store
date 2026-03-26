@@ -73,7 +73,7 @@ const NotificationsPage = () => {
       : notifications.filter((n) => n.type === filter);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 py-8 px-4 sm:px-6 lg:px-8 font-sans transition-colors duration-300">
+    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 py-6 px-6 sm:px-6 lg:px-8 font-sans transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">

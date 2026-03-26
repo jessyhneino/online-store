@@ -35,7 +35,7 @@ const CheckOut = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 py-10 px-4 sm:px-6 lg:px-8 font-sans text-slate-800 dark:text-gray-200 transition-colors duration-500">
+    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 py-6 px-6 sm:px-6 lg:px-8 font-sans text-slate-800 dark:text-gray-200 transition-colors duration-500">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-10">

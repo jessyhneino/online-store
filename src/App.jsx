@@ -19,6 +19,7 @@ import SignUp from "./pages/SignUp/SignUp.jsx";
 import WishList from "./pages/WishList/WishList.jsx";
 import NotificationsPage from "./pages/Notification/NotificationsPage.jsx";
 import Invoice from "./pages/Invoice/Invoice.jsx";
+import OrdersPage from "./pages/Orders/OrdersPage.jsx";
 
 function App() {
   const { i18n } = useTranslation();
@@ -59,6 +60,7 @@ function App() {
           <Route path="wishlist" element={<WishList />} />
           <Route path="notification" element={<NotificationsPage />} />
           <Route path="invoice" element={<Invoice />} />
+          <Route path="orders" element={<OrdersPage />} />
         </Route>
 
         {/* صفحة ProfilePage بدون Navbar و Footer */}

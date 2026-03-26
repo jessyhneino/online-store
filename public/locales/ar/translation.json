@@ -342,5 +342,22 @@
   "homeDecor": "ديكور المنزل",
   "electronics": "إلكترونيات",
   "CLick any product to show details": "انقر على أي منتج لعرض التفاصيل",
-  "Show Products": "عرض المنتجات"
+  "Show Products": "عرض المنتجات",
+  "My Orders": "طلباتي",
+  "Manage and track your digital gallery acquisitions.": "إدارة وتتبع مشترياتك من المعرض الرقمي.",
+  "Total Amount": "المبلغ الإجمالي",
+  "View Order Details": "عرض تفاصيل الطلب",
+  "Track Order": "تتبع الطلب",
+  "Return Item": "إرجاع المنتج",
+  "Need assistance with an order?": "هل تحتاج مساعدة بخصوص طلبك؟",
+  "Our curation team is available 24/7 to ensure your experience remains exceptional. From tracking to returns, we handle the details.": "فريقنا متوفر على مدار الساعة لضمان تجربة مميزة لك. من التتبع إلى الإرجاع، نحن نتكفل بكل التفاصيل.",
+  "Contact Support": "التواصل مع الدعم",
+  "Visit Help Center": "زيارة مركز المساعدة",
+  "All Orders": "كل الطلبات",
+  "In Progress": "قيد التنفيذ",
+  "Completed": "مكتمل",
+  "Cancelled": "ملغي",
+  "PROCESSING": "قيد المعالجة",
+  "SHIPPED": "تم الشحن",
+  "DELIVERED": "تم التسليم"
 }

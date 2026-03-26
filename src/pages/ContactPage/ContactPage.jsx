@@ -6,7 +6,7 @@ const ContactPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] dark:bg-zinc-900 py-16 px-4 sm:px-6 lg:px-8 font-sans text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <div className="min-h-screen bg-[#f8f9fa] dark:bg-zinc-900 py-6 px-6 sm:px-6 lg:px-8 font-sans text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <div className="max-w-6xl mx-auto md:mx-[110px]">
         {/* Header Section */}
         <header className="mb-16">
