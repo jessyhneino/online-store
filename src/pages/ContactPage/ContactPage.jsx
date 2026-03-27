@@ -1,6 +1,7 @@
 import React from "react";
 import { Phone, Mail, Instagram, Camera, Share2, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import Map from "./components/Map";
 
 const ContactPage = () => {
   const { t } = useTranslation();
@@ -87,7 +88,7 @@ const ContactPage = () => {
             </div>
 
             {/* Map */}
-            <div className="relative h-64 bg-gray-200 dark:bg-zinc-800 rounded-2xl overflow-hidden group cursor-pointer">
+            {/* <div className="relative h-64 bg-gray-200 dark:bg-zinc-800 rounded-2xl overflow-hidden group cursor-pointer">
               <img
                 src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1000"
                 alt="Map Location"
@@ -99,7 +100,8 @@ const ContactPage = () => {
                   {t("View on map")}
                 </span>
               </div>
-            </div>
+            </div> */}
+            <Map />
           </div>
 
           {/* Right Column */}
