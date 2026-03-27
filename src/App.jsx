@@ -20,6 +20,8 @@ import WishList from "./pages/WishList/WishList.jsx";
 import NotificationsPage from "./pages/Notification/NotificationsPage.jsx";
 import Invoice from "./pages/Invoice/Invoice.jsx";
 import OrdersPage from "./pages/Orders/OrdersPage.jsx";
+import ResetPassword from "./pages/ResetPassword/ResetPassword.jsx";
+import CreateNewPassword from "./pages/CreateNewPassword/CreateNewPassword.jsx";
 
 function App() {
   const { i18n } = useTranslation();
@@ -55,8 +57,7 @@ function App() {
           <Route path="checkout" element={<CheckOut />} />
           {/* <Route path="profile" element={<ProfilePage />} /> */}
           <Route path="contactpage" element={<ContactPage />} />
-          <Route path="signin" element={<SignIn />} />
-          <Route path="signup" element={<SignUp />} />
+          
           <Route path="wishlist" element={<WishList />} />
           <Route path="notification" element={<NotificationsPage />} />
           <Route path="invoice" element={<Invoice />} />
@@ -66,6 +67,10 @@ function App() {
         {/* صفحة ProfilePage بدون Navbar و Footer */}
         <Route element={<SimpleLayout />}>
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="resetpassword" element={<ResetPassword />} />
+          <Route path="createnewpassword" element={<CreateNewPassword />} />
         </Route>
       </Routes>
     </BrowserRouter>

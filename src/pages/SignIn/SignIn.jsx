@@ -78,12 +78,12 @@ export default function SignIn() {
                 <label className="text-sm font-bold text-gray-700 dark:text-gray-300">
                   {t("Password")}
                 </label>
-                <button
+                <Link to="/resetpassword"
                   type="button"
                   className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 transition-colors"
                 >
                   {t("ForgotPassword")}
-                </button>
+                </Link>
               </div>
               <div className="relative group">
                 <Lock
