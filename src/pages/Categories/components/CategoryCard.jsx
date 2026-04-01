@@ -41,7 +41,7 @@ const categories = [
   },
 ];
 
-const LuxuryGrid = ({ category }) => {
+const LuxuryGrid = ({ category, currentLang }) => {
   const { t } = useTranslation();
 
   return (
@@ -49,19 +49,24 @@ const LuxuryGrid = ({ category }) => {
       className={`group relative overflow-hidden rounded-2xl bg-gray-200 dark:bg-zinc-800 transition-all duration-500 hover:shadow-2xl ${category.className}`}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 z-10 bg-black/30 dark:bg-black/40 transition-opacity duration-300 group-hover:bg-black/20" />
+      <div className="absolute inset-0 z-10 bg-black/40 dark:bg-black/50 transition-opacity duration-300 group-hover:bg-black/30" />
 
       {/* Background Image */}
       <img
         src={category.image}
-        alt={category.title}
+        alt={t(category.title)}
         className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        loading="lazy" // تسريع تحميل الصفحة
       />
 
       {/* Text Content */}
       <div
-        className={`absolute bottom-0 left-0 z-20 w-full p-6 text-white ${
-          category.isLarge ? "text-center md:p-12" : ""
+        className={`absolute bottom-0 z-20 w-full p-6 text-white flex flex-col ${
+          category.isLarge
+            ? "text-center md:p-12 items-center"
+            : currentLang === "ar"
+            ? "right-0 text-right items-end"
+            : "left-0 text-left items-start"
         }`}
       >
         <h3
@@ -80,12 +85,18 @@ const LuxuryGrid = ({ category }) => {
 };
 
 const CategoryCard = () => {
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language.split("-")[0];
+
   return (
-    <section className="min-h-screen bg-gray-50 dark:bg-zinc-900 px-6 py-6 md:px-10 transition-colors duration-500">
-      <div className=" mx-auto lg:mx-25 max-w-7xl">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-[400px_400px_350px]">
+    // توحيد لون الخلفية مع باقي الصفحة
+    <section className="bg-gray-50 dark:bg-zinc-950 transition-colors duration-500">
+      {/* Container موحد ومطابق للنافبار والأقسام السابقة */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-12 font-sans">
+        {/* شبكة الـ Grid مع تثبيت الارتفاع للشاشات الكبيرة */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:grid-rows-[400px_400px_350px]">
           {categories.map((cat, index) => (
-            <LuxuryGrid key={index} category={cat} />
+            <LuxuryGrid key={index} category={cat} currentLang={currentLang} />
           ))}
         </div>
       </div>

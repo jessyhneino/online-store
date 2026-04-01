@@ -1,11 +1,11 @@
-import React, { useRef } from "react"; // 1. أضفنا useRef
+import React, { useRef } from "react";
 import { Download, CreditCard, Package, CheckCircle2 } from "lucide-react";
-import html2canvas from "html2canvas"; // 2. استيراد المكتبات
+import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { toPng } from "html-to-image";
 
 const Invoice = () => {
-  const invoiceRef = useRef(); // 3. مرجع لعنصر الفاتورة
+  const invoiceRef = useRef();
 
   const data = {
     orderId: "ORD-7742",
@@ -52,12 +52,10 @@ const Invoice = () => {
     transactionId: "tx_988273645521",
   };
 
-  // 4. دالة تحميل الـ PDF
   const downloadPDF = async () => {
     const element = invoiceRef.current;
-    // التقاط صورة للعنصر مع دعم الصور الخارجية (useCORS)
     const canvas = await html2canvas(element, {
-      scale: 2, // جودة عالية
+      scale: 2,
       useCORS: true,
       logging: false,
     });
@@ -76,12 +74,12 @@ const Invoice = () => {
     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save(`Invoice-${data.orderId}.pdf`);
   };
+
   const handleDownloadPDF = async () => {
     const element = invoiceRef.current;
     if (!element) return;
 
     try {
-      // تحويل العنصر إلى صورة PNG بجودة عالية
       const dataUrl = await toPng(element, {
         quality: 1,
         pixelRatio: 2,
@@ -105,8 +103,9 @@ const Invoice = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-zinc-900 py-6 px-6 sm:px-6 lg:px-8 font-sans text-slate-900 dark:text-gray-100 transition-colors duration-300">
-      <div className="max-w-4xl mx-auto">
+    /* التعديل هنا: جعل الـ padding والـ max-width متطابقين مع الـ Navbar */
+    <div className="min-h-screen bg-slate-50 dark:bg-zinc-900 pt-12 pb-12 font-sans text-slate-900 dark:text-gray-100 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Actions Bar */}
         <div className="flex justify-between items-center mb-8 print:hidden">
           <div className="flex items-center gap-2">

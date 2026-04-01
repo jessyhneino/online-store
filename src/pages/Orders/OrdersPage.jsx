@@ -68,8 +68,10 @@ const OrdersPage = () => {
       : orders.filter((order) => order.tab === activeTab);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 py-6 px-6 sm:px-6 lg:px-0 font-sans transition-colors duration-300">
-      <div className="max-w-6xl mx-auto w-full">
+    /* أزلت الـ px-6 من هنا لمنع التضارب مع حاوية الـ Container */
+    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 py-6 font-sans transition-colors duration-300">
+      {/* 🟢 تم تعديل هذا السطر ليطابق مقاسات وهوامش النافبار تماماً */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         {/* Header */}
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">

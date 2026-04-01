@@ -1,28 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const { t, i18n } = useTranslation();
+  const currentLang = i18n.language.split("-")[0];
 
   return (
     <section className="relative h-screen w-full overflow-hidden font-sans group">
       {/* Background Image & Overlay */}
       <div
-        className="absolute mt-[10px] inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[10s] ease-out group-hover:scale-110"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[10s] ease-out group-hover:scale-110"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?q=80&w=2070&auto=format&fit=crop')`,
         }}
       >
-        {/* ❗ نفس تبعك + دعم دارك فقط */}
-        <div
-          className="absolute inset-0 bg-black/50 md:bg-gradient-to-tr md:from-black md:via-black/40 md:to-transparent opacity-90
-                        dark:bg-black/70 dark:md:from-black dark:md:via-black/60 dark:md:to-transparent"
-        ></div>
+        <div className="absolute inset-0 bg-black/50 md:bg-gradient-to-tr md:from-black md:via-black/40 md:to-transparent opacity-90 dark:bg-black/70 dark:md:from-black dark:md:via-black/60 dark:md:to-transparent"></div>
       </div>
 
-      {/* Content Container */}
-      <div className="relative z-10 flex h-full flex-col justify-center items-center px-6 md:px-20 lg:px-32 text-center md:text-left md:items-start text-white">
+      {/* Content Container (تم تعديله ليطابق الـ Navbar تماماً) */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 flex h-full flex-col justify-center text-white">
         {/* Subtitle */}
         <div className="animate-fade-in-down mb-4 md:mb-6 flex items-center gap-3">
           <span className="hidden md:block h-[1px] w-8 bg-blue-600 dark:bg-blue-400"></span>
@@ -40,7 +37,13 @@ const HeroSection = () => {
         </h1>
 
         {/* Description */}
-        <p className="mb-8 md:mb-10 max-w-md text-sm md:text-lg text-gray-300/90 dark:text-gray-300/80 leading-relaxed font-light border-none md:border-l-2 md:border-white/10 md:pl-6">
+        <p
+          className={`mb-8 md:mb-10 max-w-md text-sm md:text-lg text-gray-300/90 dark:text-gray-300/80 leading-relaxed font-light border-none md:border-white/10 ${
+            currentLang === "ar"
+              ? "md:border-r-2 md:pr-6"
+              : "md:border-l-2 md:pl-6"
+          }`}
+        >
           {t(
             "Explore our curated selection of timeless essentials, handpicked forthe modern aesthetic. High quality meets minimalist design."
           )}
@@ -48,18 +51,17 @@ const HeroSection = () => {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <button className="relative overflow-hidden group/btn rounded-full bg-blue-600 px-10 py-4 text-sm font-bold tracking-wide shadow-lg transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:scale-95">
-            <Link to="/collection">
-              <span className="relative z-10">{t("shop now")}</span>
-            </Link>
-
+          <Link
+            to="/collection"
+            className="relative overflow-hidden group/btn rounded-full bg-blue-600 px-10 py-4 text-sm font-bold tracking-wide shadow-lg transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:scale-95 text-center inline-block"
+          >
+            <span className="relative z-10">{t("shop now")}</span>
             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-600 group-hover/btn:translate-x-full"></div>
-          </button>
+          </Link>
 
           <Link
             to="/collection"
-            className="rounded-full bg-white/10 px-10 py-4 text-sm font-bold backdrop-blur-md border border-white/20 transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 active:scale-95 inline-block text-center
-                       dark:bg-white/10 dark:border-white/20 dark:hover:bg-white/20 dark:hover:border-white/40"
+            className="rounded-full bg-white/10 px-10 py-4 text-sm font-bold backdrop-blur-md border border-white/20 transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 active:scale-95 inline-block text-center dark:bg-white/10 dark:border-white/20 dark:hover:bg-white/20 dark:hover:border-white/40"
           >
             {t("Show Products")}
           </Link>

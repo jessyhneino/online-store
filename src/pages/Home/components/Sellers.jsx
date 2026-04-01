@@ -71,107 +71,110 @@ const Sellers = () => {
 
   return (
     <section
-      className="py-12 px-4 max-w-7xl mx-auto font-sans select-none
-                 dark:bg-zinc-950"
+      className="w-full bg-white dark:bg-zinc-950 transition-colors duration-300"
       dir={currentDir}
     >
-      {/* Header */}
-      <div className="flex justify-between items-center mb-10">
-        <div className="flex flex-col">
-          <h2
-            className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight
-                       dark:text-zinc-100"
-          >
-            {t("Best Sellers")}
-          </h2>
-          <p className="text-left mt-6">{t("CLick any product to show details")}</p>
+      {/* Container موحد ومطابق للنافبار والأقسام السابقة */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-24 font-sans select-none">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-6">
+          <div className="flex flex-col">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight dark:text-zinc-100 mb-2">
+              {t("Best Sellers")}
+            </h2>
+            {/* تم تعديل المحاذاة لتصبح ديناميكية حسب اتجاه اللغة */}
+            <p className="text-gray-500 text-sm md:text-base dark:text-zinc-400">
+              {t("Click any product to show details")}
+            </p>
+          </div>
+
+          {/* Navigation Buttons */}
+          <div className="flex gap-2 self-end sm:self-auto">
+            <button
+              onClick={() => swiperRef.current?.swiper.slidePrev()}
+              className="p-2.5 border border-gray-200 rounded-full hover:bg-gray-100 active:scale-95 transition-all shadow-sm bg-white dark:bg-zinc-900 dark:border-zinc-700 dark:hover:bg-zinc-800"
+              aria-label="Previous slide"
+            >
+              {currentDir === "rtl" ? (
+                <ChevronRight className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
+              ) : (
+                <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
+              )}
+            </button>
+
+            <button
+              onClick={() => swiperRef.current?.swiper.slideNext()}
+              className="p-2.5 border border-gray-200 rounded-full hover:bg-gray-100 active:scale-95 transition-all shadow-sm bg-white dark:bg-zinc-900 dark:border-zinc-700 dark:hover:bg-zinc-800"
+              aria-label="Next slide"
+            >
+              {currentDir === "rtl" ? (
+                <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
+              ) : (
+                <ChevronRight className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
+              )}
+            </button>
+          </div>
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => swiperRef.current?.swiper.slidePrev()}
-            className="p-2 border border-gray-200 rounded-full hover:bg-gray-100 active:scale-95 transition-all shadow-sm bg-white
-                       dark:bg-zinc-900 dark:border-zinc-700 dark:hover:bg-zinc-800"
-          >
-            {currentDir === "rtl" ? (
-              <ChevronRight className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
-            ) : (
-              <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
-            )}
-          </button>
+        {/* Swiper */}
+        <Swiper
+          key={i18n.language}
+          dir={currentDir}
+          ref={swiperRef}
+          modules={[Navigation]}
+          spaceBetween={24} // تقليله قليلاً ليعطي توازناً أكبر في الـ Grid
+          slidesPerView={1}
+          breakpoints={{
+            440: { slidesPerView: 2, spaceBetween: 20 },
+            768: { slidesPerView: 3, spaceBetween: 24 },
+            1024: { slidesPerView: 4, spaceBetween: 24 },
+          }}
+          className="mySwiper"
+        >
+          {products.map((product) => (
+            <SwiperSlide key={product.id}>
+              <div className="group cursor-pointer">
+                <Link to={`/curator/${product.id}`}>
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 mb-4">
+                    {product.tag && (
+                      <span
+                        className={`absolute top-4 ${
+                          currentDir === "rtl" ? "right-4" : "left-4"
+                        } z-10 text-[10px] font-bold text-white px-3 py-1 rounded-full uppercase tracking-widest ${
+                          product.tagColor
+                        }`}
+                      >
+                        {t(product.tag)}
+                      </span>
+                    )}
 
-          <button
-            onClick={() => swiperRef.current?.swiper.slideNext()}
-            className="p-2 border border-gray-200 rounded-full hover:bg-gray-100 active:scale-95 transition-all shadow-sm bg-white
-                       dark:bg-zinc-900 dark:border-zinc-700 dark:hover:bg-zinc-800"
-          >
-            {currentDir === "rtl" ? (
-              <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
-            ) : (
-              <ChevronRight className="w-5 h-5 text-gray-600 dark:text-zinc-300" />
-            )}
-          </button>
-        </div>
-      </div>
+                    <img
+                      src={product.image}
+                      alt={t(product.title)}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      loading="lazy"
+                    />
+                  </div>
 
-      {/* Swiper */}
-      <Swiper
-        key={i18n.language}
-        dir={currentDir}
-        ref={swiperRef}
-        modules={[Navigation]}
-        spaceBetween={30}
-        slidesPerView={1}
-        breakpoints={{
-          440: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
-        }}
-        className="mySwiper"
-      >
-        {products.map((product) => (
-          <SwiperSlide key={product.id}>
-            <div className="group cursor-pointer">
-              <Link to={`/curator/${product.id}`}>
-                <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 mb-4">
-                  {product.tag && (
-                    <span
-                      className={`absolute top-4 ${
-                        currentDir === "rtl" ? "right-4" : "left-4"
-                      } z-10 text-[10px] font-bold text-white px-3 py-1 rounded-full uppercase tracking-widest ${
-                        product.tagColor
-                      }`}
-                    >
-                      {t(product.tag)}
+                  <div className="space-y-1">
+                    <span className="text-[10px] md:text-[11px] font-semibold text-gray-400 dark:text-zinc-500 uppercase tracking-widest">
+                      {t(product.category)}
                     </span>
-                  )}
 
-                  <img
-                    src={product.image}
-                    alt={t(product.title)}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                </div>
+                    <h3 className="text-base md:text-lg font-bold text-gray-800 dark:text-zinc-200 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 line-clamp-2">
+                      {t(product.title)}
+                    </h3>
 
-                <div className="space-y-1">
-                  <span className="text-[10px] md:text-[11px] font-semibold text-gray-400 dark:text-zinc-500 uppercase tracking-widest">
-                    {t(product.category)}
-                  </span>
-
-                  <h3 className="text-base md:text-lg font-bold text-gray-800 dark:text-zinc-200 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 truncate line-clamp-2">
-                    {t(product.title)}
-                  </h3>
-
-                  <p className="text-blue-600 dark:text-blue-400 font-bold text-sm md:text-md">
-                    {product.price}
-                  </p>
-                </div>
-              </Link>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+                    <p className="text-blue-600 dark:text-blue-400 font-bold text-sm md:text-base">
+                      {product.price}
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </section>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Phone, Mail, Instagram, Camera, Share2, MapPin } from "lucide-react";
+import { Phone, Mail, Instagram, Camera, Share2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Map from "./components/Map";
 
@@ -7,8 +7,13 @@ const ContactPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] dark:bg-zinc-900 py-6 px-6 sm:px-6 lg:px-8 font-sans text-gray-900 dark:text-gray-100 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto md:mx-[110px]">
+    // تم الحفاظ على الخلفية والخطوط كما هي بدون أي تغيير
+    <div className="min-h-screen bg-[#f8f9fa] dark:bg-zinc-900 py-12 font-sans text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      {/* الحاوية الرئيسية هنا تطابق تماماً أبعاد الـ Navbar:
+        max-w-7xl هو نفس القياس المستخدم في النافبار.
+        px-4 sm:px-6 نفس الحواف الجانبية للنافبار ليصبح كل شيء على مستوى واحد.
+      */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header Section */}
         <header className="mb-16">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
@@ -88,19 +93,6 @@ const ContactPage = () => {
             </div>
 
             {/* Map */}
-            {/* <div className="relative h-64 bg-gray-200 dark:bg-zinc-800 rounded-2xl overflow-hidden group cursor-pointer">
-              <img
-                src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1000"
-                alt="Map Location"
-                className="w-full h-full object-cover grayscale opacity-80 group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute bottom-6 left-6 flex items-center gap-2 bg-white/90 dark:bg-zinc-900/80 backdrop-blur px-4 py-2 rounded-full shadow-sm">
-                <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full animate-pulse"></div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-800 dark:text-gray-200">
-                  {t("View on map")}
-                </span>
-              </div>
-            </div> */}
             <Map />
           </div>
 

@@ -73,8 +73,10 @@ const NotificationsPage = () => {
       : notifications.filter((n) => n.type === filter);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 py-6 px-6 sm:px-6 lg:px-8 font-sans transition-colors duration-300">
-      <div className="max-w-4xl mx-auto">
+    /* 1. الطبقة الخارجية مع إضافة pt-32 لتفادي النزول تحت الـ Navbar الـ Fixed */
+    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 pt-12 pb-12 font-sans transition-colors duration-300">
+      {/* 2. حاوية العرض الكامل بنفس خصائص نافبار max-w-7xl mx-auto px-4 sm:px-6 */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
