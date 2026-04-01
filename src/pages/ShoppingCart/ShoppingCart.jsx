@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // أضفنا useNavigate هنا
 import {
   Minus,
   Plus,
@@ -17,6 +17,7 @@ import { useCart } from "../../context/CartContext";
 const ShoppingCart = () => {
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language.split("-")[0];
+  const navigate = useNavigate(); // قمنا بتعريف الهوك هنا
 
   const { cartItems, updateQuantity, removeFromCart } = useCart();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -29,9 +30,17 @@ const ShoppingCart = () => {
   const tax = cartItems.length > 0 ? 77.2 : 0;
   const total = subtotal + tax;
 
+  // الدالة الجديدة المسؤولة عن حفظ البيانات والانتقال
+  const handleProceedToCheckout = () => {
+    // 1. حفظ السلة في الـ Local Storage (لحمايتها عند الريفرش)
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+
+    // 2. التوجيه لصفحة الدفع مع إرسال المنتجات
+    navigate("/checkout", { state: { cartProducts: cartItems } });
+  };
+
   return (
     <div className="bg-[#F8F9FA] dark:bg-[#0a0a0a] font-sans text-slate-900 dark:text-gray-100 transition-colors duration-500">
-      {/* Container موحد ومطابق للنافبار وباقي الأقسام */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-12">
         {/* Header */}
         <div
@@ -53,16 +62,15 @@ const ShoppingCart = () => {
             <div className="lg:col-span-8 space-y-6">
               {cartItems.map((item) => (
                 <div
-                  key={item.id}
+                  key={item.cartId}
                   className={`relative bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800 flex flex-col sm:flex-row gap-6 items-center transition-colors ${
                     currentLang === "ar"
                       ? "sm:flex-row-reverse text-right"
                       : "text-left"
                   }`}
                 >
-                  {/* زر الحذف الفعلي */}
                   <button
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => removeFromCart(item.cartId)}
                     className={`absolute top-4 text-slate-400 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 transition-colors ${
                       currentLang === "ar" ? "left-4" : "right-4"
                     }`}
@@ -86,18 +94,34 @@ const ShoppingCart = () => {
                     <h3 className="text-xl font-bold text-black dark:text-white">
                       {item.name}
                     </h3>
+
+                    <div className="flex gap-2 justify-center sm:justify-start text-xs text-slate-500 dark:text-zinc-400 mb-2">
+                      <span>
+                        {t("Color")}:{" "}
+                        <b className="text-black dark:text-white uppercase">
+                          {item.color}
+                        </b>
+                      </span>
+                      <span>|</span>
+                      <span>
+                        {t("Size")}:{" "}
+                        <b className="text-black dark:text-white">
+                          {item.size}
+                        </b>
+                      </span>
+                    </div>
+
                     <p className="text-slate-400 dark:text-zinc-500 text-sm mb-4">
                       {item.desc || "High quality selection"}
                     </p>
 
-                    {/* التحكم بالكمية */}
                     <div
                       className={`inline-flex items-center bg-gray-100 dark:bg-zinc-800 rounded-lg p-1 transition-colors ${
                         currentLang === "ar" ? "flex-row-reverse" : ""
                       }`}
                     >
                       <button
-                        onClick={() => updateQuantity(item.id, -1)}
+                        onClick={() => updateQuantity(item.cartId, -1)}
                         className="p-2 hover:bg-white dark:hover:bg-zinc-700 rounded-md transition-all text-black dark:text-white"
                       >
                         <Minus size={14} />
@@ -106,7 +130,7 @@ const ShoppingCart = () => {
                         {item.quantity}
                       </span>
                       <button
-                        onClick={() => updateQuantity(item.id, 1)}
+                        onClick={() => updateQuantity(item.cartId, 1)}
                         className="p-2 hover:bg-white dark:hover:bg-zinc-700 rounded-md transition-all text-black dark:text-white"
                       >
                         <Plus size={14} />
@@ -208,8 +232,9 @@ const ShoppingCart = () => {
 
                 <hr className="my-8 border-gray-100 dark:border-zinc-800" />
 
-                <Link
-                  to="/checkout"
+                {/* تم تعديل هذا الزر من Link إلى button ليعمل عبر الدالة */}
+                <button
+                  onClick={handleProceedToCheckout}
                   className={`w-full bg-blue-600 dark:bg-blue-500 text-white rounded-2xl py-5 font-bold flex items-center justify-center gap-3 hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-lg active:scale-[0.98] ${
                     currentLang === "ar" ? "flex-row-reverse" : ""
                   }`}
@@ -219,7 +244,7 @@ const ShoppingCart = () => {
                     size={18}
                     className={currentLang === "ar" ? "rotate-180" : ""}
                   />
-                </Link>
+                </button>
 
                 <div
                   className={`hidden lg:flex justify-center gap-5 mt-8 text-slate-300 dark:text-zinc-600 ${
@@ -319,8 +344,10 @@ const ShoppingCart = () => {
                       </span>
                     </div>
                   </div>
-                  <Link
-                    to="/checkout"
+
+                  {/* تم تعديل هذا الزر أيضاً للموبايل ليعمل عبر الدالة */}
+                  <button
+                    onClick={handleProceedToCheckout}
                     className={`w-full bg-blue-600 text-white rounded-2xl py-4 font-bold flex items-center justify-center gap-3 ${
                       currentLang === "ar" ? "flex-row-reverse" : ""
                     }`}
@@ -330,7 +357,7 @@ const ShoppingCart = () => {
                       size={18}
                       className={currentLang === "ar" ? "rotate-180" : ""}
                     />
-                  </Link>
+                  </button>
                 </div>
               </div>
             )}

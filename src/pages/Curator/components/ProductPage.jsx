@@ -9,7 +9,7 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useCart } from "../../../context/CartContext";
 
 const ProductPage = () => {
@@ -18,23 +18,29 @@ const ProductPage = () => {
 
   const { addToCart, cartItems } = useCart();
 
+  const location = useLocation();
+  const productFromState = location.state?.product;
+
   const [selectedSize, setSelectedSize] = useState("S");
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState("obsidian");
 
-  // بيانات المنتج الحالي
+  // بيانات المنتج الأساسية
   const product = {
-    id: "p1",
-    name: t("Sculpted Wool Overcoat"),
-    price: 895.0,
+    id: productFromState?.id || "p1",
+    name: productFromState?.name || t("Sculpted Wool Overcoat"),
+    price: productFromState?.price || 895.0,
     image:
+      productFromState?.image ||
       "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=1000&auto=format&fit=crop",
-    category: t("Outerwear"),
-    color: selectedColor,
-    size: selectedSize,
+    category: productFromState?.category || t("Outerwear"),
   };
 
-  const alreadyInCart = cartItems.some((item) => item.id === product.id);
+  // إنشاء معرف فريد يجمع بين ID المنتج واللون والمقاس
+  const uniqueCartId = `${product.id}-${selectedColor}-${selectedSize}`;
+
+  // التحقق مما إذا كانت هذه التشكيلة المعينة موجودة في السلة بالفعل
+  const alreadyInCart = cartItems.some((item) => item.cartId === uniqueCartId);
 
   const sizes = ["XS", "S", "M", "L", "XL"];
 
@@ -46,13 +52,19 @@ const ProductPage = () => {
 
   const handleAddToCart = () => {
     if (!alreadyInCart) {
-      addToCart({ ...product, quantity });
+      // نرسل الـ cartId المميز مع المنتج والكمية المختارة
+      addToCart({
+        ...product,
+        cartId: uniqueCartId,
+        color: selectedColor,
+        size: selectedSize,
+        quantity: quantity,
+      });
     }
   };
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0a0a] font-sans text-zinc-900 dark:text-gray-200 transition-colors duration-500">
-      {/* Container موحد ومطابق للنافبار والأقسام السابقة */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-16">
         <div
           className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-start ${
@@ -139,7 +151,7 @@ const ProductPage = () => {
               <p className="text-[10px] font-bold uppercase mb-4 text-black dark:text-white">
                 {t("Color")}:{" "}
                 <span className="font-normal text-zinc-500">
-                  {colors.find((c) => c.id === selectedColor).name}
+                  {colors.find((c) => c.id === selectedColor)?.name}
                 </span>
               </p>
               <div

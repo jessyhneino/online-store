@@ -15,7 +15,8 @@ const ProductCard = ({ product }) => {
   return (
     <div
       className="group relative flex flex-col cursor-pointer"
-      onClick={() => navigate(`/curator/${product.id}`)}
+      // التعديل هنا: نقوم بتمرير الـ product كامل في الـ state
+      onClick={() => navigate(`/curator/${product.id}`, { state: { product } })}
     >
       {/* Container الصورة */}
       <div className="relative aspect-[3/4] overflow-hidden bg-[#f6f6f6] dark:bg-zinc-900 rounded-xl transition-all duration-500">

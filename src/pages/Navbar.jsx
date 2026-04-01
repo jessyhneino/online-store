@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "../context/CartContext"; // تم استيراد سياق السلة هنا
 
 export default function AdvancedNavbar() {
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
@@ -28,6 +29,15 @@ export default function AdvancedNavbar() {
   const navigate = useNavigate();
   const menuRef = useRef(null);
   const searchRef = useRef(null);
+
+  // --- استدعاء بيانات السلة ---
+  const { cartItems } = useCart();
+
+  // حساب المجموع الكلي للكميات ديناميكياً
+  const totalItemsInCart = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   // --- حالات القوائم والبحث ---
   const [isOpen, setIsOpen] = useState(false);
@@ -241,15 +251,17 @@ export default function AdvancedNavbar() {
               {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
             </motion.button>
 
-            {/* Cart Icon - ADDED FOR DESKTOP */}
+            {/* Cart Icon - DESKTOP (تم تحديثه ليكون ديناميكياً) */}
             <Link
               to="/cart"
               className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-zinc-800 relative hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all"
             >
               <ShoppingCartIcon size={18} className="dark:text-white" />
-              <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">
-                3
-              </span>
+              {totalItemsInCart > 0 && (
+                <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">
+                  {totalItemsInCart}
+                </span>
+              )}
             </Link>
 
             <div className="h-6 w-[1px] bg-gray-200 dark:bg-zinc-800 mx-1 hidden lg:block" />
@@ -420,13 +432,22 @@ export default function AdvancedNavbar() {
                       {currentLang === "en" ? "AR" : "EN"}
                     </span>
                   </button>
+
+                  {/* Cart - MOBILE (تم تحديثه ليكون ديناميكياً) */}
                   <div className="relative flex flex-col items-center gap-1">
-                    <Link to="/cart">
-                      <ShoppingCartIcon size={20} className="dark:text-white" />
-                      <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">
-                        3
-                      </span>
-                      <span className="text-[10px] uppercase font-bold text-gray-500">
+                    <Link to="/cart" className="flex flex-col items-center">
+                      <div className="relative">
+                        <ShoppingCartIcon
+                          size={20}
+                          className="dark:text-white"
+                        />
+                        {totalItemsInCart > 0 && (
+                          <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">
+                            {totalItemsInCart}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[10px] uppercase font-bold text-gray-500 mt-1">
                         {t("Cart")}
                       </span>
                     </Link>
